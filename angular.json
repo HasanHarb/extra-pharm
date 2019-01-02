@@ -23,9 +23,31 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/plugins/bootstrap/css/bootstrap.min.css",
+              "src/assets/plugins/bootstrap/css/bootstrap-rtl.min.css",
+              "src/assets/plugins/bootstrap-select/css/bootstrap-select.min.css",
+              "src/assets/plugins/prettyphoto/css/prettyPhoto.css",
+              "src/assets/plugins/owl-carousel2/assets/owl.carousel.min.css",
+              "src/assets/plugins/owl-carousel2/assets/owl.theme.default.min.css",
+              "src/assets/plugins/animate/animate.min.css",
+              "src/assets/css/theme.css",
+              "src/assets/css/theme-red-1.css",
+              "src/assets/css/busy.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plugins/jquery/jquery-1.11.1.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.min.js",
+              "src/assets/plugins/bootstrap-select/js/bootstrap-select.min.js",
+              "src/assets/plugins/superfish/js/superfish.min.js",
+              "src/assets/plugins/prettyphoto/js/jquery.prettyPhoto.js",
+              "src/assets/plugins/owl-carousel2/owl.carousel.min.js",
+              "src/assets/plugins/jquery.sticky.min.js",
+              "src/assets/plugins/jquery.easing.min.js",
+              "src/assets/plugins/jquery.smoothscroll.min.js",
+              "src/assets/plugins/smooth-scrollbar.min.js",
+              "src/assets/js/theme.js"
+            ]
           },
           "configurations": {
             "production": {

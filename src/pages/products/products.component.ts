@@ -116,7 +116,6 @@ export class ProductsComponent implements OnInit, OnChanges {
 	}
 
 	rangeChanged(event:any){
-		console.log(this.range);
 		this.minPrice = this.range[0];
 		this.maxPrice = this.range[1];
 		this.getProducts();

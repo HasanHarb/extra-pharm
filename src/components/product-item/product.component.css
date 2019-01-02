@@ -1,0 +1,83 @@
+.horizontal-item {
+    margin-bottom: 10px;
+}
+
+.media-image {
+    width: 100px;
+}
+
+.horizontal-item img {
+    width: 100px;
+}
+
+.in-fav, .in-cart {
+    background-color: #498dcb;
+    color: #ffffff;
+    opacity: 1;
+    border-color: #498dcb;
+}
+
+.pro-row-large {
+    height: 420px;
+}
+
+.pro-row-small {
+    height: 420px;
+}
+
+.pro-row-horizontal {
+    height: 145px;
+}
+
+.how-much-sale {
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    padding: 5px 10px;
+    background-color: #EC0231;
+    border-radius: 15px 0 15px 0px;
+    color: #fff;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.product-icon {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center center;
+}
+
+.caption-title {
+    height: 50px;
+}
+
+.caption-company {
+    height: 25px;
+}
+
+.brand-name{
+    font-size: 12px;
+}
+
+.brand-name span {
+    display: inline-block;
+    border-bottom: 1px solid #eee;
+    padding: 0 8px;
+}
+
+.decimal {
+    position: relative;
+    top: -7px;
+}

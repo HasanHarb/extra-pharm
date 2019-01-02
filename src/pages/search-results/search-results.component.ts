@@ -24,11 +24,8 @@ export class SearchResultsComponent implements OnInit {
 
 	}
 
-	ngOnInit() {
-		console.log("search");
-		
+	ngOnInit() {		
 		this.route.queryParams.subscribe(params => {
-			console.log(params['q']);
 			this.search_key = params['q'];
 			this.searchProducts();
 		});

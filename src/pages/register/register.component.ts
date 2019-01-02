@@ -44,8 +44,8 @@ export class RegisterComponent implements OnInit {
     };
 
     this.fb.init(initParams);
-
-    console.log('Enter');this.fb.login()
+    
+    this.fb.login()
     .then((response: LoginResponse) => console.log(response))
     .catch((error: any) => console.error(error));
 

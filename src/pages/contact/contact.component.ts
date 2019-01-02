@@ -58,12 +58,10 @@ export class ContactComponent implements OnInit {
 			this.errorArray.push('CONTACT_MESSAGE_REQUIRED');
 			this.flag = false;
 		}
-		console.log(this.contactForm.value);
 		if(this.flag)
 		{
 			this.busy = this.repo.postContactUsMessage(this.contactForm.value).subscribe(data => {
 				if (data.id != null) {
-					console.log(data);
 					this.contactForm.reset();
 					this.globals.successAlert('DONE', 'SUCCEED');
 				}

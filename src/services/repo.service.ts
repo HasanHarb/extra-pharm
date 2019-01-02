@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Config } from "../config";
-import 'rxjs/add/operator/map'; 
+import 'rxjs/add/operator/map';
 
 const url = Config.ApiUrl;
 let cacheKey = url;
@@ -228,8 +227,6 @@ export class Repo {
     }
 
     getAttributes(categorySlug: any){
-        console.log(categorySlug);
-        console.log(url);
         return this.http.get(url + 'groups', {params: {categorySlug: categorySlug, isFilter: 1}}).map(res => res.json());
     }
 

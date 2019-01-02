@@ -1,0 +1,19 @@
+<div *ngFor="let group of groups" class="widget shop-categories">
+    <div class="panel-heading" role="tab" id="headingBrand">
+        <h4 class="widget-title panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseBrand" aria-expanded="false" aria-controls="collapseMobile">
+                {{ group.label }}
+            </a>
+        </h4>
+    </div>
+    <div id="collapseBrand" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBrand">
+        <div class="widget-content">
+            <ul>
+                <li class="link" [ngClass]="{'active': selectedFilters.brands == 'ALL'}" (click)="applyFilter('brands', 'ALL')">{{'ALL' | translate}}</li>                
+                <li class="link" *ngFor="let attr of group.attributes" [ngClass]="{'active':selectedFilters.attr.id == company.id}" (click)="applyFilter(attr.slug, attr)">
+                    {{ attr.name }}
+                </li>                
+            </ul>
+        </div>
+    </div>
+</div>

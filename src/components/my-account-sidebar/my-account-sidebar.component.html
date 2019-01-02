@@ -1,0 +1,12 @@
+<!--start sidebar-->
+<div class="col-lg-3 col-md-3 col-sm-4">
+        <div class="widget account-details">
+            <h2 class="widget-title">{{ 'PROFILE'| translate }}</h2>
+            <ul>
+                <li *ngFor="let link of links">
+                    <a  [title]="host + '/' + link.routerLink" class="link" [ngClass]="{'active': link.selector === source}"  routerLink="{{link.routerLink}}"> {{ link.title | translate }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--end sidebar-->

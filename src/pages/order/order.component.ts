@@ -47,8 +47,7 @@ export class OrderComponent implements OnInit {
 	}
 
 	getStatus(item:any){		
-		let status = this.statusList.filter( s => s.status == item.status)[0];		
-		console.log(status);
+		let status = this.statusList.filter( s => s.status == item.status)[0];
 		//return status; //.icon + '-done.png';
 	}
 

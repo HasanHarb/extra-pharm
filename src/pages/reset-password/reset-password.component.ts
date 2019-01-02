@@ -36,18 +36,13 @@ export class ResetPasswordComponent implements OnInit {
       this.repo.resetPassword({ email: this.email })
         .subscribe(data => {
           if (data == 'exist') {
-            console.log('exist');
             this.txtLabel = "PASSWORD_SENT_MSG";
           }
           else {
-            console.log('not in database');
             this.txtLabel = "EMAIL_NOT_IN_DB";
           }
         },
         err => {
-          console.log('error --------');
-          console.log(err._body);
-          console.log('error --------');
           this.txtLabel = "REG_ERROR";
         });
 

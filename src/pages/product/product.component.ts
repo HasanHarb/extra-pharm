@@ -167,15 +167,12 @@ export class ProductComponent implements OnInit {
 			this.productImage = this.product.image;
 			// get product attributes
 			this.attrs = data.attrs;
-			console.log(this.attrs);
 			for (var key in this.attrs) {
 				if (this.attrs[key].listable) {
 					this.attrs[key].group = key;
 					this.attrsArray.push(this.attrs[key]);
 				}
 			}
-			console.log(this.attrsArray);
-			console.log(this.product.category.name);
 			// get product colors
 			this.colors = data.colors;
 			this.colors.forEach(color => {
