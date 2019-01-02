@@ -1,0 +1,15 @@
+.main-slider{
+    height: 375px;
+    overflow: hidden;
+}
+
+.main-slider .item, 
+.main-slider .owl-item{
+    height: 375px;
+}
+.main-slider .thumbnail-image{
+    height: 375px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}

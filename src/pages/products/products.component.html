@@ -1,0 +1,167 @@
+<div class="content-area" name="head">
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ (category | localize:'name') || category.name }}</h1>              
+            </div>
+        </div>
+        <ul class="breadcrumb">
+            <li><a [routerLink]="['/']">{{ 'HOME' | translate }}</a></li>
+            <li class="active">{{ (category | localize:'name') || category.name }}</li>
+        </ul>
+    </section>
+    <section class="page-section with-sidebar">
+        <div class="container">
+            <div class="row">
+                <aside class="col-md-3 sidebar" id="sidebar">
+
+                    <div class="panel panel-de fault">
+                        
+                        <div class="search-above-filter">
+                            <div class="widget">
+                                <div class="widget-search">
+                                    <input [(ngModel)]="search_key" (ngModelChange)="getProducts()" class="form-control" type="text" placeholder="Search">
+                                    <button *ngIf="search_key" (click)="close()">
+                                        <a>
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngFor="let group of groups" class="widget shop-categories filter-by">
+                            <div class="panel-heading" role="tab" id="heading{{ group.slug }}">
+                                <h4 class="widget-title panel-title">
+                                    <span class="filter-title-span">{{'FS_BY' | translate}} {{ (group | localize:'slug') || group.slug }}</span>
+                                </h4>
+                            </div>
+                            <div id="{{ group.slug }}" class="collapse in">
+                                <div class="widget-content">
+                                    <ul>
+                                        <li class="link" [ngClass]="{'active': selectedFilters[group.slug] == 'ALL'}" (click)="applyFilter(group.slug, 'ALL')">
+                                            <span>{{'ALL' | translate}}</span>
+                                        </li>
+                                        <li class="link" *ngFor="let attr of group.attributes | slice:0:limitAttrs" [ngClass]="{'active': selectedFilters[group.slug] == attr.id}" (click)="applyFilter(group.slug, attr.id)">
+                                            <span class="filter-label">{{ (attr | localize:'name') || attr.name }}</span>
+                                            <span class="filter-count">{{ attr.count }}</span>
+                                        </li>
+                                        <li *ngIf="group.attributes.length > 15" (click)="showMore(group.attributes.length)">
+                                            <span *ngIf="limitAttrs == 15" class="show-more-span">أظهر المزيد</span>
+                                            <span *ngIf="limitAttrs > 15" class="show-more-span">أظهر أقل</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget shop-categories filter-by range-slider">
+                            <div class="panel-heading" role="tab" id="headingPrice">
+                                <h4 class="widget-title panel-title">
+                                    <span class="filter-title-span">
+                                        {{ 'FS_BY_PRICE' | translate }}
+                                    </span>
+                                </h4>                                
+                            </div>
+                            <div id="price">
+                                <div class="widget-content" style="padding: 10px;">
+                                    <range-slider [min]="rangeMin" [max]="rangeMax" [step]="10" [(ngModel)]="range"></range-slider>
+                                    <button class="btn btn-theme btn-theme-dark" (click)="rangeChanged($event)">فلتر</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </aside>
+
+                <div class="col-md-9 content" id="content">
+                    <div class="main-slider sub">
+                        <div class="owl-carousel" id="main-slider">
+                            <div class="item slide1 sub">
+                                <img class="slide-img" src="assets/img/preview/slider/slide-1-sub.jpg" alt="" />
+                                <div class="caption">
+                                    <div class="container">
+                                        <div class="div-table">
+                                            <div class="div-cell">
+                                                <div class="caption-content">
+                                                    <h2 class="caption-title">
+                                                        <span>{{ 'WINTER_FASHION' | translate }}</span>
+                                                    </h2>
+                                                    <h3 class="caption-subtitle">
+                                                        <span>{{ 'COLLECTION_READY' | translate }}</span>
+                                                    </h3>
+                                                    <p class="caption-text">
+                                                        <a class="btn btn-theme" href="#">{{ 'SHOP_NOW' | translate }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item slide2 sub">
+                                <img class="slide-img" src="assets/img/preview/slider/slide-1-sub.jpg" alt="" />
+                                <div class="caption">
+                                    <div class="container">
+                                        <div class="div-table">
+                                            <div class="div-cell">
+                                                <div class="caption-content">
+                                                    <h2 class="caption-title">
+                                                        <span>{{ 'WINTER_FASHION' | translate }}</span>
+                                                    </h2>
+                                                    <h3 class="caption-subtitle">
+                                                        <span>{{ 'COLLECTION_READY' | translate }}</span>
+                                                    </h3>
+                                                    <p class="caption-text">
+                                                        <a class="btn btn-theme" href="#">{{ 'SHOP_NOW' | translate }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-sorting">
+                        
+                    </div>
+                    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+
+                    <div *ngIf="!busy && !products.length">
+                        <h3>{{ 'EMPTY_PRODUCTS_MESSAGE' | translate }}</h3>
+                    </div>
+                    <div class="row products grid" *ngIf="products.length > 0">
+                        <product-item *ngFor="let product of products" [product]="product" [col]="'col-md-3 col-sm-6'" [template]="'large'"></product-item>
+                    </div>
+                    <div class="pagination-wrapper center-pager" *ngIf="products.length">
+                        <ul class="pagination bot-left" *ngIf="pages.length != 0">
+                            <li style="display: none;"></li>
+                            <li (click)="getProducts(pageNumber - 1)" *ngIf="pageNumber != 1">
+                                <a [routerLink]="['/products/', categorySlug]" [queryParams]="{'page': pageNumber - 1}">
+                                    <i class="fa fa-angle-double-right"></i>
+                                </a>
+                            </li>
+                            <li *ngFor="let num of pages; let i = index;" (click)="getProducts(i + 1)"  [ngClass]="{'active': pageNumber == i + 1}">
+                                <a [routerLink]="['/products/', categorySlug]" [queryParams]="{'page': i + 1}">{{ i + 1 }}</a>
+                            </li>
+                            <li *ngIf="pages.length != lastPage">
+                                <a>...</a>
+                            </li>
+                            <li (click)="getProducts(lastPage)" *ngIf="pages.length != lastPage" [ngClass]="{'active': activePageNumber(lastPage)}">
+                                <a [routerLink]="['/products/', categorySlug]" [queryParams]="{'page': lastPage}">{{ lastPage }}</a>
+                            </li>
+                            <li (click)="getProducts(pageNumber + 1)" *ngIf="pageNumber != lastPage">
+                                <a [routerLink]="['/products/', categorySlug]" [queryParams]="{'page': pageNumber + 1}">
+                                    <i class="fa fa-angle-double-left"></i>
+                                </a>
+                            </li>
+                            <li style="display: none;"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <promotion-boxes></promotion-boxes>
+</div>

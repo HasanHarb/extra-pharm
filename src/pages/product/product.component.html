@@ -1,0 +1,183 @@
+<div class="content-area" [ngBusy]="{busy: busy, message: 'Loading..', backdrop: false, delay: 200, minDuration: 600}">
+    <div [ngBusy]="busy"></div>
+
+    <spinner *ngIf="productBusy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+
+    <section class="page-section" *ngIf="product.id">
+        <section class="page-section breadcrumbs">
+            <ul class="breadcrumb">
+                <li><a [routerLink]="['/']">{{ 'HOME' | translate }}</a></li>
+                <li><a [routerLink]="['/products/', product.category.slug]">{{ (product.category | localize:'name') || product.category.name }}</a></li>
+                <li class="active">{{ (product | localize:'title') || product.title }}</li>
+            </ul>
+        </section>
+        <div class="container">
+            <div class="row product-single">
+                <div class="col-md-6">
+                  <img class="img-responsive" src="{{ productImage }}" alt="{{ (product | localize:'title') || product.title }}">
+                    <div class="how-much-sale" *ngIf="product.sale > 0">
+                        <span class="the-text-sale">{{ product.sale }} %{{ "SALE"| translate }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="back-to-category hide">
+                        <div class="pull-left">
+                            <a class="btn btn-theme btn-theme-transparent btn-next" routerLink="/product/{{ product.id + 1 }}">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                            <a class="btn btn-theme btn-theme-transparent btn-previous" routerLink="/product/{{ product.id - 1 }}">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h2 class="product-title">
+                        {{ (product | localize:'title') || product.title }}
+                        <span *ngIf="attrs.Company">- {{ (attrs.Company | localize:'name') || attrs.Company.name }}</span>
+                    </h2>
+
+                    <div class="product-availability" *ngIf="!product.in_stock" class="text-danger">
+                        <h2>
+                            {{ 'SPECIAL_ORDER_TEXT' | translate }}
+                        </h2>
+                    </div>
+
+                    <hr class="page-divider small" />
+
+                    <div class="product-price">
+                        <ins>
+                            <span class="new-price">
+                                <span class="int">₪{{ priceAfterSale }}</span>
+                            </span>
+                        </ins>
+                        <del *ngIf="priceAfterSale != price">{{ price }} ₪</del>
+                    </div>
+
+                    <hr class="page-divider" />
+
+                    <form class="row variable" *ngIf="types.length">
+                        <div class="col-sm-6">
+                            <div class="form-group selectpicker-wrapper">
+                                <label for="exampleSelect1">{{ 'TYPE' | translate }}</label>
+                                <select id="exampleSelect1" class="selectpicker input-price form-control" data-live-search="true" data-width="100%" data-toggle="tooltip"
+                                    title="Select" (change)="selectProductType($event.target.value)" [(ngModel)]="selectedTypeId" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let type of types" value="{{ type.id }}">{{ (type | localize:'name') || type.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="page-divider" />
+                    </form>
+
+                    <form class="row variable" *ngIf="colors.length">
+                        <div class="col-sm-6">
+                            <div class="form-group selectpicker-wrapper">
+                                <label for="exampleSelect2">{{ 'COLOR' | translate }}</label>
+                                <select class="selectpicker input-color form-control" name="color" [(ngModel)]="productColor" (ngModelChange)="onColorChange()">
+                                    <option [ngValue]="undefined" disabled  selected>{{ 'SELECT_COLOR' | translate }}</option>
+                                    <option *ngFor="let color of colors" [ngValue]="color">{{ (color | localize:'name') || color.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="page-divider" />
+                    </form>
+
+                    <div class="product-body">
+                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="product.body.length <= 100"></div>
+                      <div class="product-text" [innerHTML]="truncateHTML(product.body)" *ngIf="truncating && product.body.length > 100"></div>
+                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="!truncating && product.body.length > 100"></div>
+                      <button class="show-more-btn show-more-text" *ngIf="truncating && product.body.length > 100" (click)="truncating = false">{{ 'SHOW_MORE_TEXT' | translate }}</button>
+                      <button class="show-more-btn show-lestt-text" *ngIf="!truncating && product.body.length > 100" (click)="truncating = true">{{ 'SHOW_LESS_TEXT' | translate }}</button>
+                    </div>
+
+
+                    <div class="more-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="attrs-list">
+                                    <li *ngIf="product.sku">
+                                        <strong>{{ 'YARPA_CODE' | translate }}: </strong>
+                                        <span>{{ product.sku }}</span>
+                                    </li>
+                                    <li *ngIf="categorySlug">
+                                        <strong>{{ 'CATEGORY' | translate }}: </strong>
+                                        <span>{{ categorySlug }}</span>
+                                    </li>
+
+                                    <li *ngFor="let attr of attrsArray">
+                                        <strong>{{ attr.group | translate }}: </strong>
+                                        <span>{{ attr.name }}</span>
+                                    </li>
+
+                                    <li *ngIf="product.weight">
+                                        <strong *ngIf="!attrs.hasOwnProperty('Weight Unit')">الوزن: </strong>
+                                        {{ product.weight }} <span *ngIf="attrs.hasOwnProperty('Weight Unit')">{{ attrs['Weight Unit'].name }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="product-icons-list">
+                                    <ul class="icons-list">
+                                        <li *ngIf="attrs.Icon"><img src="{{ imagesUrlBase + attrs.Icon.image }}"></li>
+                                        <li *ngIf="attrs.pharmacy_delivery"><img src="{{ imagesUrlBase + attrs.pharmacy_delivery.image }}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="page-divider" />
+
+                    <div class="buttons" *ngIf="product.id">
+                        <div class="quantity" *ngIf="product.in_stock">
+                            <button class="btn" (click)="changeQuantity('-')">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <input class="form-control qty" type="number" step="1" min="1" name="quantity" [(ngModel)]="quantity" title="Qty">
+                            <button class="btn" (click)="changeQuantity('+')">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <button *ngIf="product.in_stock && !inCart(product)" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="addToCart()"
+                            [ngClass]="{'in-cart' : inCart()}">
+                            <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}</button>
+                        <button *ngIf="product.in_stock && inCart(product)" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="removeProductFromCart(product)"
+                            [ngClass]="{'in-cart' : inCart()}">
+                            <i class="fa fa-shopping-cart"></i>{{ 'REMOVE_FORM_CART' | translate }}</button>
+                        <button *ngIf="!product.in_stock" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="specialBtnClicked()">
+                            <i class="fa fa-shopping-cart"></i>{{ 'SPECIAL_ORDER' | translate }}</button>
+                        <button *ngIf="product.in_stock" class="btn btn-theme btn-wish-list" (click)="toggleFav()" [ngClass]="{'in-fav' : inFav()}">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <hr class="page-divider small" />
+
+                    <form *ngIf="specialClicked">
+                        <textarea class="form-control" name="notes" [(ngModel)]="specialNotes" placeholder="{{ 'NOTES' | translate }}"></textarea>
+                        <hr class="page-divider small" />
+
+                        <button class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="specialOrder()">{{ 'SPECIAL_ORDER' | translate }}</button>
+                    </form>
+                    <hr class="page-divider small" />
+
+                    <share-buttons [title]="title"></share-buttons>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PAGE -->
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title section-title-lg">
+                <span>{{ 'RELATED_PRODUCTS'| translate }}</span>
+            </h2>
+            <div class="top-products-carousel">
+                <owl-carousel [options]="topRatedCarouselOptions" [items]="products" [carouselClasses]="['owl-theme', 'owl-carouse', 'sliding']">
+                    <product-item *ngFor="let prod of products" [template]="'small'" [product]="prod"></product-item>
+                </owl-carousel>
+            </div>
+            <hr class="page-divider half" />
+            <a *ngIf="categorySlug" [title]="host + '/products/' + categorySlug" class="btn btn-theme btn-view-more-block" routerLink="/products/{{ categorySlug }}" style="max-width: 100%;">{{ "VIEW_MORE" | translate }}</a>
+        </div>
+    </section>
+</div>

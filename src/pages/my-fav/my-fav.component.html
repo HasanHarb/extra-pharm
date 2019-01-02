@@ -1,0 +1,67 @@
+<!-- CONTENT AREA -->
+<div class="content-area">
+    <section class="page-section">
+        <div class="wrap container">
+            <div class="row">
+                <my-account-sidebar source="fav"></my-account-sidebar>
+                <!--start main contain of page-->
+                <div class="col-lg-9 col-md-9 col-sm-8">
+                    <div class="information-title">{{ 'MY_PROFILE'| translate }}</div>
+                    <div class="details-wrap">
+                        <div class="block-title">{{ 'MY_FAVOURITES' | translate}}</div>
+                        <div class="details-box">
+
+                            <div class="row wishlist">
+                                    <div class="col-md-12">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'PRODUCT_IMAGE' | translate }}</th>
+                                            <th>{{ 'PRODUCT_NAME' | translate }}</th>
+                                            <th>{{ 'PRODUCT_PRICE' | translate }}</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of favorites; let i = index;">
+                                            <td class="image">
+                                                <a class="media-link" href="#" title="#">
+                                                    <i class="fa fa-plus"></i>
+                                                    <img src="{{ item.image }}" alt="{{ (item | localize:'title') || item.title }}" width="105" height="115">
+                                                </a>
+                                            </td>
+                                            <td class="description">
+                                                <h4>
+                                                    <a href="#" title="{{ (item | localize:'title') || item.title }}">{{ (item | localize:'title') || item.title }}</a>
+                                                </h4>
+                                            </td>
+                                            <td class="price">{{ item.regular_price }} ₪</td>
+                                            <td class="add">
+                                                <a class="btn btn-theme btn-theme-dark btn-icon-left" (click)="addToCart(item)">
+                                                    <i class="fa fa-shopping-cart"></i> {{ 'ADD_TO_CART'| translate }}
+                                                </a>
+                                            </td>
+                                            <td class="total">
+                                                <a mwlConfirmationPopover confirmText="{{ 'YES' | translate }}" cancelText="{{ 'NO' | translate }}" popoverTitle="{{ 'CONFIRM_DELETE' | translate }}"
+                                                    popoverMessage="{{ 'CONFIRM_DELETE_MSG' | translate }}" placement="right" (confirm)="toggleFav(item)">
+                                                    <i class="fa fa-close"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--end main contain of page-->
+            </div>
+
+        </div>
+    </section>
+</div>
+<!-- /CONTENT AREA -->

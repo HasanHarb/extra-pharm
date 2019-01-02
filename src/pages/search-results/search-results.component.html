@@ -1,0 +1,25 @@
+<div class="content-area">
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'SEARCH_RESULTS'| translate }}: {{ search_key }} </h1>
+            </div>
+        </div>
+    </section>
+    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#dc143c'" style="right: 50%; padding-right: -50%; margin-top: 10%"></spinner>
+    <section class="page-section" *ngIf="results.length == 0 && !busy">
+        <div class="container">
+            <div class="text-center empty-cart">
+                <h1 class="alert">{{ 'NO_RESULTS' | translate }}</h1>
+            </div>
+        </div>
+    </section>
+    <section class="page-section with-sidebar">
+        <div class="container">
+            <div class="row products grid">
+                <product-item *ngFor="let product of results" [product]="product" [col]="'col-md-3 col-sm-3'" [template]="'large'"></product-item>
+            </div>
+        </div>
+    </section>
+    <promotion-boxes></promotion-boxes>
+</div>

@@ -1,0 +1,48 @@
+<div class="content-area">
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'ABOUT' | translate }}</h1>
+            </div>            
+        </div>
+    </section>    
+    <section class="page-section color">
+        <div class="container">
+            <hr class="page-divider"/>
+        </div>
+    </section>
+    <section class="page-section">
+    <div class="container">
+        <div class="tabs">
+            <ul id="tabs" class="nav nav-justified-off">
+                <li class="">
+                    <a href="#tab-1" title="{{ 'TAB_FEATURED' | translate }}" data-toggle="tab">{{ 'TAB_FEATURED' | translate }}</a>
+                </li>
+                <li class="active">
+                    <a href="#tab-2" title="{{ 'TAB_NEWEST' | translate }}" data-toggle="tab">{{ 'TAB_NEWEST' | translate }}</a>
+                </li>
+                <li class="">
+                    <a href="#tab-3" title="{{ 'TAB_TOP_SELLERS' | translate }}" data-toggle="tab">{{ 'TAB_TOP_SELLERS' | translate }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade" id="tab-1">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['featured']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+            <div class="tab-pane fade active in" id="tab-2">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['newest']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-3">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['topSellers']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    
+</div>

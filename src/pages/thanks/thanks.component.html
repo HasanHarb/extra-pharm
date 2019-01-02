@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="thanks">
+        <h2>{{ 'CHECKOUT_THANKS' | translate }}</h2>
+        <p>{{ 'CHECKOUT_SUCCESS_TEXT' | translate }}</p>
+        <p>
+            <a [title]="host + '/my-orders/' + orderId" routerLink="/my-orders/{{ orderId }}">{{ 'CLICK_HERE' | translate }}</a>
+        </p>
+    </div>        
+</div>

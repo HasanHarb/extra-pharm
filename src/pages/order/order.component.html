@@ -1,0 +1,69 @@
+<!-- CONTENT AREA -->
+<div class="content-area">
+    <section class="page-section">
+        <div class="wrap container">
+            <div class="row">
+                <my-account-sidebar source="orders"></my-account-sidebar>
+                <!--start main contain of page-->
+                <div class="col-lg-9 col-md-9 col-sm-8">
+                    <div class="information-title">{{ 'MY_PROFILE'| translate }}</div>
+                    <div class="block-title">{{ 'ORDER_DETAILS' | translate }}</div>
+                    <div class="details-box">
+
+                        <div class="row orders">
+                            <div class="col-md-12">
+                                    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+                                <table class="table" *ngIf="!busy">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'PRODUCT_IMAGE' | translate }}</th>
+                                            <th>{{ 'QUANTITY' | translate }}</th>
+                                            <th>{{ 'PRODUCT_NAME' | translate }}</th>
+                                            <th>{{ 'COLOR' | translate }}</th>
+                                            <th>{{ 'PRODUCT_PRICE' | translate }}</th>
+                                            <th>{{ 'TOTAL' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of item.products">
+                                            <td class="image">
+                                                <a class="media-link">
+                                                    <i class="fa fa-plus"></i>
+                                                    <img width="70px" *ngIf="item.status != 'CANCEL'" [src]="baseStorageURL + product.product.image" alt="{{ (product.product | localize:'title') || product.product.title }}" />
+                                                </a>
+                                            </td>
+                                            <td class="quantity">
+                                                <div class="quantity">
+                                                    x{{ product.quantity }}
+                                                </div>
+                                            </td>
+                                            <td class="description">
+                                                <a title="{{ (product.product | localize:'title') || product.product.title }}" [routerLink]="'/product/' + product.product.id">
+                                                    <h4>{{ (product.product | localize:'title') || product.product.title }}</h4>
+                                                </a>
+                                            </td>
+                                            <td class="color">
+                                                <h4>
+                                                    {{ product.color }}
+                                                </h4>
+                                            </td>
+                                            <td class="total">₪{{ product.price }}</td>
+                                            <td class="total">₪{{ product.price * product.quantity }}
+                                                <span class="status-text" *ngIf="item.is_special == 'YES'">{{ "SPECIAL_ORDER" | translate }}</span>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end main contain of page-->
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<!-- /CONTENT AREA -->

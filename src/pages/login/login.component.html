@@ -1,0 +1,80 @@
+<div class="content-area">
+
+    <!-- PAGE -->
+    <!--div id="preloader" *ngIf="isLoading">
+            <div id="preloader-status">
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+                <div id="preloader-title">{{ 'LOADING' | translate }}</div>
+            </div>
+        </div-->
+        <div [ngBusy]="busy"></div>
+
+    <section class="page-section color">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="block-title"><span>{{ 'LOGIN' | translate }}</span></h3>
+                    <form action="#" class="form-login">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="email" type="text" [(ngModel)]="email" placeholder="{{ 'EMAIL' | translate }}"></div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group"><input class="form-control" name="password" type="password" [(ngModel)]="password" placeholder="{{ 'PASSWORD' | translate }}"></div>
+                            </div>
+                            <div class="col-md-12 col-lg-6">
+                                <div class="checkbox">
+                                    <label><input type="checkbox">{{ 'REMEMBER_ME' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 text-right-lg">
+                                <a class="forgot-password" [title]="host + '/reset-password'" routerLink="/reset-password">{{ 'FORGET_PASSWORD' | translate }}</a>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 text-left-lg">
+                                <span style="color: red" >{{ txtError }}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-theme btn-block btn-theme-dark" (click)="doLogin()" value="{{ 'LOGIN' | translate }}">
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <button class="btn btn-theme btn-block btn-icon-left facebook" (click)="loginWithFB()"><i class="fa fa-facebook"></i>{{ 'SIGN_IN_WITH_FB' | translate }}</button>
+                            </div>
+                        </div>
+                    </form>
+                   
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="block-title"><span>{{ 'CREATE_EF_ACCOUNT' | translate }}</span></h3>
+                    <form action="#" class="create-account">
+                        <div class="row">                            
+                            <div class="col-md-12">                                
+                                <ul class="list-check">
+                                    <li>{{ 'ONLINE_ORDER'| translate }}</li>
+                                    <li>{{ 'HOT_DEALS'| translate }}</li>
+                                    <li>{{ 'WISHLIST'| translate }}</li>
+                                    <li>{{ 'RECEIVE_THE_LATEST'| translate }}</li>
+                                    <li>{{ 'QUICK_BUY'| translate }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <a class="btn btn-block btn-theme btn-theme-dark btn-create" [title]="host + '/register'" href="/register">{{ 'CREATE_EF_ACCOUNT' | translate }}</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /PAGE -->
+
+    <!-- PAGE -->
+    <promotion-boxes></promotion-boxes>

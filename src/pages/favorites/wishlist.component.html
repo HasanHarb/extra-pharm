@@ -1,0 +1,94 @@
+<div class="content-area" [ngBusy]="{busy: busy, message: 'Loading..', backdrop: false, delay: 200, minDuration: 600}">
+>
+
+    <!-- BREADCRUMBS -->
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'FAVORITES' | translate}}</h1>
+            </div>           
+        </div>
+    </section>
+    <!-- /BREADCRUMBS -->
+
+    <!-- PAGE -->
+    <section class="page-section" *ngIf="favorites.length == 0">
+        <div class="container">
+            <div class="text-center empty-cart">
+                <h3 class="alert">{{ 'EMPTY_FAV' | translate }}</h3>
+            </div>
+        </div>
+    </section>
+    <section class="page-section color no-padding-bottom"  *ngIf="favorites.length > 0">
+        <div class="container">
+
+            <div class="row wishlist">
+                <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PRODUCT_IMAGE' | translate }}</th>
+                                <th>{{ 'PRODUCT_NAME' | translate }}</th>
+                                <th>{{ 'PRODUCT_PRICE' | translate }}</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of favorites; let i = index;">
+                                <td class="image"><a class="media-link" title="#" href="#"><i class="fa fa-plus"></i><img src="{{ item.image }}" alt="{{ (item | localize:'title') || item.title }}" width="105" height="115"></a></td>
+                                <td class="description">
+                                    <h4><a title="{{ (item | localize:'title') || item.title }}" href="#">{{ (item | localize:'title') || item.title }}</a></h4>
+                                </td>
+                                <td class="price">{{ item.regular_price }} ₪</td>
+                                <td class="add">
+                                    <a title="{{'ADD_TO_CART' | translate }}" class="btn btn-theme btn-theme-dark btn-icon-left" (click)="addToCart(item)">
+                                        <i class="fa fa-shopping-cart"></i> {{ 'ADD_TO_CART'| translate }}
+                                    </a>
+                                </td>
+                                <td class="total"><a title="{{'REMOVE' | translate}}" (click)="toggleFav(item)"><i class="fa fa-close"></i></a></td>
+                            </tr>                                                       
+                        </tbody>
+                    </table>                    
+                </div>
+                <div class="col-md-3" *ngIf="!loggedIn">
+                    <h3 class="block-title"><span>{{ 'LOGIN' | translate }}</span></h3>
+                    <form action="#" class="form-sign-in">
+                        <div class="row">
+                            <div class="col-md-12 hello-text-wrap">
+                                <span class="hello-text text-thin">{{ 'YOU_SHOULD_BE_LOGGED_IN' | translate }}</span>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-theme btn-block btn-icon-left facebook" href="#">
+                                    <i class="fa fa-facebook"></i> {{ 'WITH_FACEBOOK' | translate }}
+                                </a>
+                            </div>                            
+                            <div class="col-md-12">
+                                <div class="form-group"><input class="form-control" type="text" placeholder="{{ 'EMAIL' | translate }}"></div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group"><input class="form-control" type="password" placeholder="{{ 'PASSWORD' | translate }}"></div>
+                            </div>
+                            <div class="col-md-12 col-lg-6">
+                                <div class="checkbox">
+                                    <label><input type="checkbox">{{ 'REMEMBER_ME' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 text-right-lg">
+                                <a class="forgot-password" href="#">{{ 'FORGET_PASSWORD' | translate }}</a>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-theme btn-block btn-theme-dark" href="#">{{ 'LOGIN' | translate }}</a>
+                            </div>
+                            <div class="col-md-12">
+                                <a routerLink="/register" class="btn btn-theme btn-block btn-theme-transparent" href="#">{{ 'REGISTER' | translate }}</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /PAGE -->
+    <promotion-boxes></promotion-boxes>     
+</div>

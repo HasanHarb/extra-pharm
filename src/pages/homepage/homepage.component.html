@@ -1,0 +1,126 @@
+<section class="page-section">
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="thumbnail no-border no-padding thumbnail-banner size-3x3">
+                    <div class="media">
+                        <a class="media-link" [title]="host + '/products/' + firstCategory.slug" routerLink="/products/{{ firstCategory.slug }}">
+                            <div class="img-bg first-cate-img"  [ngStyle]="{'background-image' : 'url(' + imagesUrlBase + firstCategory.desktop_image + ')'}"></div>
+                            <div class="caption">
+                                <div class="caption-wrapper div-table">
+                                    <div class="caption-inner div-cell">
+                                        <h2 class="caption-title">
+                                            <span>{{ (firstCategory | localize:'name') || firstCategory.name }}</span>
+                                        </h2>
+                                        <h3 class="caption-sub-title">
+                                            <p [innerHTML]="firstCategory | localize:'desc' || firstCategory.desc"></p>
+                                        </h3>
+                                        <span   class="btn btn-theme btn-theme-sm">{{ 'SHOP'| translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngFor="let cat of threeCate | slice:1" >
+                <div class="thumbnail no-border no-padding thumbnail-banner size-2x3">
+                    <div class="media">
+                        <a class="media-link" [title]="host + '/products/' + cat.slug" routerLink="/products/{{ cat.slug }}">
+                            <div class="img-bg cat-images" [ngStyle]="{'background-image' : 'url(' + imagesUrlBase + cat.desktop_image + ')'}"></div>
+                            <div class="caption text-left ">
+                                <div class="caption-wrapper div-table">
+                                    <div class="caption-inner div-cell">
+                                        <h2 class="caption-title">
+                                            <span>{{ (cat | localize:'name') || cat.name }}</span>
+                                        </h2>
+                                        <h3 class="caption-sub-title">
+                                            <p [innerHTML]="cat | localize:'desc' || cat.desc"></p>
+                                        </h3>
+                                        <span   class="btn btn-theme btn-theme-sm">{{ 'SHOP'| translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="tabs">
+            <ul id="tabs" class="nav nav-justified-off">
+                <li class="">
+                    <a href="#tab-1" title="{{ 'TAB_FEATURED' | translate }}" data-toggle="tab">{{ 'TAB_FEATURED' | translate }}</a>
+                </li>
+                <li class="active">
+                    <a href="#tab-2" title="{{ 'TAB_NEWEST' | translate }}" data-toggle="tab">{{ 'TAB_NEWEST' | translate }}</a>
+                </li>
+                <li class="">
+                    <a href="#tab-3" title="{{ 'TAB_TOP_SELLERS' | translate }}" data-toggle="tab">{{ 'TAB_TOP_SELLERS' | translate }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade" id="tab-1">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['featured']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+            <div class="tab-pane fade active in" id="tab-2">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['newest']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-3">
+                <div class="row">
+                    <product-item *ngFor="let product of topFourProducts['topSellers']" [product]="product" [template]="'large'"></product-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="message-box" *ngFor="let banner of centerBanners">
+            <a *ngIf="banner.link" href="{{ banner.link }}">
+                <div class="message-box-inner">
+                    <h2>{{ (banner | localize:'text') || banner.text }}</h2>
+                </div>
+            </a>
+            <div *ngIf="!banner.link" class="message-box-inner">
+                <h2>{{ (banner | localize:'text') || banner.text }}</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span>{{ 'TOP_RATED_PRODUCTS' | translate }}</span>
+        </h2>
+        <div class="top-products-carousel">
+            <owl-carousel [options]="topRatedCarouselOptions" [items]="topTenProducts" [carouselClasses]="['owl-theme', 'owl-carouse', 'sliding']">
+                <product-item *ngFor="let product of topTenProducts" [template]="'small'" [product]="product"></product-item>
+            </owl-carousel>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" *ngFor="let item of topCategorizedProducts">
+                <div class="product-list">
+                    <a class="btn btn-theme btn-title-more" [title]="host + '/products/' + item.category.slug" routerLink="/products/{{ item.category.slug }}" style="margin-right: 0px;z-index: 100000;margin-top: -10px;">{{ 'SEE_ALL' | translate }}</a>
+                    <h4 class="block-title">
+                        <span>{{ item.category | localize:'name' || item.name }}</span>
+                    </h4>
+                    <product-item *ngFor="let product of item.products" [product]="product" [template]="'horizontal'"></product-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<promotion-boxes></promotion-boxes>

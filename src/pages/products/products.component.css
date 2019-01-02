@@ -1,0 +1,167 @@
+.active {  
+  color: #dc143c !important;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.pagination-cont {}
+
+.pagination li {
+  cursor: pointer;
+  margin-top: 10px;
+
+}
+
+.search-paginate {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.search-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-right: -5px;
+}
+.search-title {
+  margin-top: -7px !important;
+}
+.bot-left {
+  float: left;
+}
+
+spinner {
+  border-color: #dc143c rgba(255, 102, 255, 0.1) rgba(255, 102, 255, 0.1) !important;
+}
+
+.empty-cat{
+  padding: 60px 0 100px;
+}
+
+.empty-cat h3{
+  margin: 0;
+  text-align: center;
+}
+.show-brands {
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+.search-above-filter {
+    margin-bottom: 20px;
+}
+.center-pager {
+    display: flex;
+    justify-content: center;
+}
+
+.widget.shop-categories{
+  border: 0 !important;
+  background-color: #f5f5f5;
+}
+
+.filter-by .panel-heading {
+  padding: 10px 5px !important;
+}
+
+.widget.shop-categories .widget-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.widget.shop-categories ul {
+  padding: 5px 10px;
+}
+
+.widget.shop-categories ul li + li {
+  color: #000;
+}
+
+.widget {
+  margin-top: 0 !important;
+}
+
+.content .widget + .widget, .sidebar .widget + .widget, .footer .widget + .widget {
+  margin-top: 5px;
+}
+
+.range-slider {
+  margin: 50px 0 15px 0;
+}
+
+.filter-title-span{
+  display: inline-block;
+  font-size: 12px;
+}
+.filter-title-span:before,
+.filter-title-span:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background-color: #eee;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 35px;
+}
+
+.filter-title-span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.filter-title-span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+.widget-title {
+  position: relative;
+  font-size: 12px;
+}
+
+.widget-content ul {
+  padding: 0 !important;
+}
+
+.widget-content ul li {
+  padding: 0 25px;
+  position: relative;
+}
+
+.widget-content ul li span.filter-label {
+  border-top: dotted 1px #ddd;
+  display: block;
+  padding: 7px 0;
+  font-size: 12px;
+}
+
+.widget-content ul li:hover{
+  background-color: #e7e7e7;
+}
+
+.widget-content ul li span.filter-count {
+  position: absolute;
+  left: 30px;
+  font-size: 10px;
+  z-index: 10;
+  height: 20px;
+  width: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 100%;
+  background-color: #fff;  
+  text-align: center;
+  display: inline-block;
+  line-height: 22px;
+}
+
+.show-more-span {
+  cursor: pointer;
+  padding: 7px 0;
+  display: block;
+  text-align: center
+}

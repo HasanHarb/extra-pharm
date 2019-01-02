@@ -1,0 +1,132 @@
+<div [ngBusy]="busy"></div>
+<div class="content-area">
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'CONTACT' | translate }}</h1>
+            </div>
+        </div>
+    </section>
+    <section class="page-section color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-info" *ngIf="settings != null">
+                        <h2 class="block-title">
+                            <span>{{ "CONTACT_US" | translate }}</span>
+                        </h2>
+                        <div class="media-list">
+                            <div class="media">
+                                <i class="pull-right fa fa-home"></i>
+                                <div class="media-body">
+                                    <strong>{{ "ADDRESS"| translate }}:</strong>
+                                    <br> {{ settings.contact_address.value }}
+                                </div>
+                            </div>
+                            <div class="media">
+                                <i class="pull-right fa fa-phone"></i>
+                                <div class="media-body">
+                                    <strong>{{ 'PHONE_NUMBER' | translate }}:</strong>
+                                    <br> {{ settings.contact_phone.value }}
+                                </div>
+                            </div>
+                            <div class="media">
+                                <i class="pull-right fa fa-envelope-o"></i>
+                                <div class="media-body">
+                                    <strong>{{ 'EMAIL' | translate }}:</strong>
+                                    <br> <a href="mailto:{{ settings.contact_email.value }}">{{ settings.contact_email.value }}</a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-body">
+                                        {{ settings.contact_description.value }}
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-body">
+                                    <strong>{{ 'CUSTOMER_SERVICE' | translate }}:</strong>
+                                    <br>
+                                    <br> <a href="mailto:{{ settings.contact_email.value }}">{{ settings.contact_service_customer_email.value }}</a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-body">
+                                    <strong>{{ 'REFUND'| translate }}:</strong>
+                                    <br>
+                                    <br> <a href="mailto:{{ settings.contact_email.value }}">{{ settings.contact_purchases_email.value }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-8 text-right">
+
+                    <h2 class="block-title">
+                        <span>{{ 'CONTACAT_FIELDS'| translate }}</span>
+                    </h2>
+
+                    <!-- Contact form -->
+                    <form [formGroup]="contactForm" (ngSubmit)="sendMessage()">
+
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <label class="sr-only" for="name">{{ 'CONTACT_NAME'| translate }}</label>
+                                <input type="text" name="name" id="name" placeholder="{{ 'CONTACT_NAME' | translate }}" value="" size="30" data-toggle="tooltip"
+                                    title="Name is required" class="form-control placeholder" formControlName="name" />
+                            </div>
+                        </div>
+
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <label class="sr-only" for="phone_number">{{ 'CONTACT_PHONE' | translate }}</label>
+                                <input type="text" name="phone_number" id="phone_number" placeholder="{{ 'CONTACT_PHONE'| translate }}" value="" size="30" data-toggle="tooltip"
+                                    title="Phone number is required" class="form-control placeholder" formControlName="phone_number" />
+                            </div>
+                        </div>
+
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <label class="sr-only" for="subject">{{ 'CONTACT_SUBJECT' | translate }}</label>
+                                <input type="text" name="subject" id="subject" placeholder="{{ 'CONTACT_SUBJECT'| translate }}" value="" size="30" data-toggle="tooltip"
+                                    title="Subject is required" class="form-control placeholder" formControlName="subject" />
+                            </div>
+                        </div>
+
+                        <div class="form-group af-inner">
+                            <label class="sr-only" for="input-message">{{ 'CONTACT_MESSAGE' | translate }}</label>
+                            <textarea name="message" id="input-message" placeholder="{{ 'CONTACT_MESSAGE' | translate }}" rows="4" cols="50" data-toggle="tooltip"
+                                title="Message is required" class="form-control placeholder" formControlName="message"></textarea>
+                        </div>
+                        <div class="row" *ngIf="!flag">
+                            <div class="col-md-12 col-lg-12 text-left-lg">
+                                <span style="color: red">
+                                    <ul>
+                                        <li *ngFor="let error of errorArray">{{error | translate}}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <input type="submit" name="submit" class="form-button form-button-submit btn btn-theme btn-theme-dark" id="submit_btn" value="{{ 'SEND' | translate }}"
+                                />
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- /Contact form -->
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- /PAGE -->
+
+    <!-- PAGE -->
+
+</div>
+<!-- /CONTENT AREA -->

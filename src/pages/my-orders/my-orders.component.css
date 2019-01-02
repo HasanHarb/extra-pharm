@@ -1,0 +1,7 @@
+spinner {
+  border-color: #dc143c rgba(255, 102, 255, 0.1) rgba(255, 102, 255, 0.1) !important;
+}
+.active{
+  color: #fff;
+  background-color: #dc143c !important;
+}

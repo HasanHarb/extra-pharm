@@ -1,0 +1,41 @@
+<div class="page">
+	<div class="container">
+		<h2>{{ (content | localize:'title') || content.title }}</h2>
+		<div class="body" [innerHTML]="content.body"></div>
+	</div>
+</div>
+
+<section class="page-section">
+	<div class="container">
+		<div class="tabs">
+			<ul id="tabs" class="nav nav-justified-off">
+				<li class="">
+					<a href="#tab-1" data-toggle="tab">{{ 'TAB_FEATURED' | translate }}</a>
+				</li>
+				<li class="active">
+					<a href="#tab-2" data-toggle="tab">{{ 'TAB_NEWEST' | translate }}</a>
+				</li>
+				<li class="">
+					<a href="#tab-3" data-toggle="tab">{{ 'TAB_TOP_SELLERS' | translate }}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div class="tab-pane fade" id="tab-1">
+				<div class="row">
+					<product-item *ngFor="let product of topFourProducts['featured']" [product]="product" [template]="'large'"></product-item>
+				</div>
+			</div>
+			<div class="tab-pane fade active in" id="tab-2">
+				<div class="row">
+					<product-item *ngFor="let product of topFourProducts['newest']" [product]="product" [template]="'large'"></product-item>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="tab-3">
+				<div class="row">
+					<product-item *ngFor="let product of topFourProducts['topSellers']" [product]="product" [template]="'large'"></product-item>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

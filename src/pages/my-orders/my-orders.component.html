@@ -1,0 +1,89 @@
+<!-- CONTENT AREA -->
+<div class="content-area">
+    <section class="page-section">
+        <div class="wrap container">
+            <div class="row">
+                <my-account-sidebar source="orders"></my-account-sidebar>
+                <!--start main contain of page-->
+                <div class="col-lg-9 col-md-9 col-sm-8">
+                    <div class="information-title">{{ 'MY_PROFILE'| translate }}</div>
+                    <div class="details-wrap">
+                        <div class="block-title">{{ 'MY_ORDERS' | translate }}</div>
+                        <div class="details-box">
+
+                            <div class="row orders">
+                                <div class="col-md-12">
+                                    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+                                    <div *ngIf="! items.length && !busy">
+                                        <h4>{{ 'EMPTY_ORDERS_MESSAGE' | translate }}</h4>
+                                    </div>
+                                    <table class="table" *ngIf="items.length">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'ORDER_ID' | translate }}</th>
+                                                <th>{{ 'ORDER_DATE' | translate }}</th>
+                                                <th>{{ 'ORDER_STATUS' | translate }}</th>
+                                                <th></th>
+                                                <th>{{ 'TOTAL' | translate }}</th>
+                                                <th>{{ 'ORDER_DETAILS' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of items" [ngClass]="{ 'active': item.id == selectedOrder.id }">
+                                                <td class="total">{{ item.id }}</td>
+                                                <td class="description">
+                                                    <h4>
+                                                        {{ item.created_at | date:'yyyy/M/dd' }}
+                                                    </h4>
+                                                </td>
+                                                <td class="quantity">
+                                                    <div class="quantity">
+                                                        {{ getStatus(item).status | translate }}
+                                                    </div>
+                                                </td>
+                                                <td class="image">
+                                                    <a class="media-link link">
+                                                        <i class="fa fa-plus"></i>
+                                                        <img width="70px" *ngIf="item.status != 'CANCEL'" [src]="getStatus(item).icon +'-done.png'" alt="{{ item.status }}" />
+                                                    </a>
+                                                </td>
+                                                <td class="total">₪{{ item.final_price }}
+                                                    <span class="status-text" style="color:red" *ngIf="item.is_special == 'YES'">
+                                                        <br/>{{ "SPECIAL_ORDER" | translate }}</span>
+                                                </td>
+                                                <td class="order-status">
+                                                    <a [title]="host + '/my-orders/' + item.id" [routerLink]="'/my-orders/' + item.id" class="btn btn-theme btn-theme-dark">{{ 'ORDER_DETAILS'| translate }}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="shop-sorting" *ngIf="items.length">
+                                            <div class="row search-paginate">
+                                                <div class="col-sm-8 text-right-sm">
+                                                    <ul class="pagination" *ngIf="pages.length != 0">
+                                                        <li (click)="getItems(page-1)" *ngIf="page > 1">
+                                                            <a><i class="fa fa-angle-double-right"></i></a>
+                                                        </li>
+                                                        <li *ngFor="let num of pages; let i = index;" (click)="getItems(i + 1)">
+                                                            <a [ngClass]="{ 'active' : page == (i + 1) }">{{ i + 1 }}</a>
+                                                        </li>
+                                                        <li (click)="getItems(page + 1)" *ngIf="page < pages.length">
+                                                            <a><i class="fa fa-angle-double-left"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end main contain of page-->
+            </div>
+
+        </div>
+    </section>
+</div>
+<!-- /CONTENT AREA -->

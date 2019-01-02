@@ -1,0 +1,18 @@
+<div class="content-area">
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'SALES'| translate }}</h1>
+            </div>
+        </div>
+    </section>
+    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#dc143c'" style="right: 50%; padding-right: -50%; margin-top: 10%"></spinner>
+    <section class="page-section with-sidebar" >
+        <div class="container">
+            <div class="row products grid" *ngIf="sales.length > 0">
+                <product-item  *ngFor="let product of sales" [product]="product" [col]="'col-md-3 col-sm-6'" [template]="'large'"></product-item>
+            </div>
+        </div>
+    </section>
+    <promotion-boxes></promotion-boxes>
+</div>

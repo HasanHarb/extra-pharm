@@ -1,0 +1,63 @@
+<!-- CONTENT AREA -->
+<div class="content-area">
+    <!-- BREADCRUMBS -->
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'CATEGORIES' | translate }}</h1>
+            </div>
+        </div>
+    </section>
+    <!-- /BREADCRUMBS -->
+    <!-- PAGE WITH SIDEBAR -->
+    <section class="page-section">
+        <div class="container">
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="thumbnail no-border no-padding thumbnail-banner size-3x3">
+                    <div class="media">
+                        <a class="media-link" [title]="host + '/products/' + firstCategory.slug" routerLink="/products/{{ firstCategory.slug }}">
+                            <div class="img-bg first-cate-img"  [ngStyle]="{'background-image' : 'url(' + imagesUrlBase + firstCategory.image + ')'}"></div>
+                            <div class="caption">
+                                <div class="caption-wrapper div-table">
+                                    <div class="caption-inner div-cell">
+                                        <h2 class="caption-title">
+                                            <span>{{ (firstCategory | localize:'name') || firstCategory.name }}</span>
+                                        </h2>
+                                        <h3 class="caption-sub-title">
+                                            <p [innerHTML]="firstCategory | localize:'desc' || firstCategory.desc"></p>
+                                        </h3>
+                                        <span   class="btn btn-theme btn-theme-sm">{{ 'SHOP'| translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngFor="let cat of categories | slice:1" >
+                <div class="thumbnail no-border no-padding thumbnail-banner size-2x3">
+                    <div class="media">
+                        <a class="media-link" [title]="host + '/products/' + cat.slug" routerLink="/products/{{ cat.slug }}">
+                            <div class="img-bg cat-images" [ngStyle]="{'background-image' : 'url(' + imagesUrlBase + cat.image + ')'}"></div>
+                            <div class="caption text-left ">
+                                <div class="caption-wrapper div-table">
+                                    <div class="caption-inner div-cell">
+                                        <h2 class="caption-title">
+                                            <span>{{ (cat | localize:'name') || cat.name }}</span>
+                                        </h2>
+                                        <h3 class="caption-sub-title">
+                                            <p [innerHTML]="cat | localize:'desc' || cat.desc"></p>
+                                        </h3>
+                                        <span   class="btn btn-theme btn-theme-sm">{{ 'SHOP'| translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

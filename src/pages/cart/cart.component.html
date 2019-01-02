@@ -1,0 +1,295 @@
+<!-- CONTENT AREA -->
+<div class="content-area" >
+    <!-- [ngBusy]="{busy: busy, message: 'Loading..', backdrop: false, delay: 200, minDuration: 600}"
+ -->
+        <div [ngBusy]="busy"></div>
+
+   <!-- BREADCRUMBS -->
+    <section class="page-section breadcrumbs">
+        <div class="container">
+            <div class="page-header">
+                <h1>{{ 'SHOPING_CART' | translate }}</h1>
+            </div>
+            <ul class="breadcrumb">
+                <li>
+                    <a title="{{ 'HOME' | translate }}" href="#">{{ 'HOME' | translate }}</a>
+                </li>
+                <li>
+                    <a title="{{ 'SHOP' | translate }}" href="#">{{ 'SHOP' | translate }}</a>
+                </li>
+                <li class="active">{{ 'SHOPING_CART' | translate }}</li>
+            </ul>
+        </div>
+    </section>
+    <!-- /BREADCRUMBS -->
+
+    <!-- PAGE -->
+    <section class="page-section" *ngIf="(activeItemsInCart.length == 0) && (outInvItemsInCart.length == 0)">
+        <div class="container">
+            <div class="text-center empty-cart">
+                {{ 'EMPTY_CART' | translate }}
+            </div>
+        </div>
+    </section>
+    <section class="page-section color" *ngIf="(activeItemsInCart.length > 0) || (outInvItemsInCart.length > 0)">
+        <div class="container">
+
+            <form action="#" class="form-sign-in" *ngIf="! isLoggedIn">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <a [title]="host + '/login?source=_cart'" class="btn btn-theme btn-block btn-theme-dark" [routerLink]="['/login']" [queryParams]="{ source: '_cart' }">{{'LOGIN' | translate}}</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a [title]="host + '/register?source=_cart'" class="btn btn-theme btn-block btn-theme-dark" [routerLink]="['/register']" [queryParams]="{ source: '_cart'}">{{'REGISTER' | translate}}</a>
+                    </div>
+                </div>
+            </form>
+
+            <h3 class="block-title alt">
+                <i class="fa fa-angle-down"></i>{{'CART' | translate}}</h3>
+            <div class="row orders">
+                <div class="col-md-8">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PRODUCT_IMAGE' | translate }}</th>
+                                <th>{{ 'QUANTITY' | translate }}</th>
+                                <th>{{ 'PRODUCT_NAME' | translate }}</th>
+                                <th>{{ 'COLOR' | translate }}</th>
+                                <th>{{ 'PRODUCT_PRICE' | translate }}</th>
+                                <th>{{ 'TOTAL' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of activeItemsInCart">
+                                <td class="image">
+                                    <a class="media-link" href="#" title="#">
+                                        <i class="fa fa-plus"></i>
+                                        <img width="70px" src="{{ item.product.image }}" alt="{{ (item.product | localize:'title') || product.title }}" />
+                                    </a>
+                                </td>
+                                <td class="quantity">
+                                    <div class="quantity">
+                                        <button class="btn" (click)="changeQuantity('-', item)">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        {{ item.quantity }}
+                                        <button class="btn" (click)="changeQuantity('+', item)">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="description">
+                                    <h4>
+                                        <a href="#" title="{{ (item.product | localize:'title') || item.product.title }}">{{ (item.product | localize:'title') || item.product.title }}</a>
+                                    </h4>
+                                </td>
+                                <td class="color">
+                                    <h4>
+                                        {{ item.color }}
+                                    </h4>
+                                </td>
+                                <td class="total">₪{{ resolvePrices(item) }}</td>
+                                <td class="total">₪{{ resolvePrices(item) * item.quantity }}
+                                    <a title="{{ 'REMOVE' | translate }}" mwlConfirmationPopover confirmText="{{ 'YES' | translate }}" cancelText="{{ 'NO' | translate }}" popoverTitle="{{ 'CONFIRM_DELETE' | translate }}" popoverMessage="{{ 'CONFIRM_DELETE_MSG' | translate }}" placement="left" (confirm)="remove(item)">
+                                        <i class="fa fa-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of outInvItemsInCart">
+                                    <td class="image">
+                                        <a class="media-link" href="#" title="#">
+                                            <i class="fa fa-plus"></i>
+                                            <img width="70px" src="{{ item.product.image }}" alt="{{ (item.product | localize:'title') || item.product.title }}" />
+                                        </a>
+                                    </td>
+                                    <td class="quantity">
+                                        <div class="quantity">
+                                            <button class="btn" (click)="changeQuantity('-', item)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            {{ item.quantity }}
+                                            <button class="btn" (click)="changeQuantity('+', item)">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="description">
+                                        <h4>
+                                            <a href="#" title="{{ (item.product | localize:'title') || item.product.title }}">{{ (item.product | localize:'title') || item.product.title }}</a>
+                                        </h4>
+                                    </td>
+                                    <td class="total">₪{{ resolvePrices(item) }}</td>
+                                    <td class="total">₪{{ resolvePrices(item) * item.quantity }}
+                                        <a title="{{ 'REMOVE' | translate }}" mwlConfirmationPopover confirmText="{{ 'YES' | translate }}" cancelText="{{ 'NO' | translate }}" popoverTitle="{{ 'CONFIRM_DELETE' | translate }}" popoverMessage="{{ 'CONFIRM_DELETE_MSG' | translate }}" placement="left" (confirm)="remove(item)">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="block-title">
+                        <span>{{ 'SHOPING_CART' | translate }}</span>
+                    </h3>
+                    <div class="shopping-cart">
+                        <table>
+                            <tr>
+                                <td>{{ 'SUB_TOTAL' | translate }}: </td>
+                                <td>₪{{ getTotal() }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'DISCOUNT' | translate }}:</td>
+                                <td>₪{{ discount }}
+                                    <a title="{{ 'CANCEL' | translate }}" (click)="cancelCoupon()" *ngIf="discount">
+                                        <i class="fa fa-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tfoot>
+                                <tr>
+                                    <td>{{ 'TOTAL' | translate }}:</td>
+                                    <td>₪{{ getTotal() - discount }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control" name="coupon" type="text" [(ngModel)]="couponItem.key" placeholder="{{ 'ENTER_COUPON_NUMBER' | translate }}"
+                                />
+                            </div>
+                            <div class="col-md-12 col-lg-12 text-left-lg" *ngIf="couponNotValid">
+                                <span style="color: red">{{ 'COUPON_NOT_VALID' | translate }}</span>
+                            </div>
+                            <button type="submit" (click)="checkCoupon()" class="btn btn-theme btn-theme-dark btn-block">
+                                <span *ngIf="!couponBusy">{{ 'ENTER_COUPON'| translate }}</span>
+                                <spinner *ngIf="couponBusy" [size]="20" [tickness]="2" [color]="'#ff66ff'"></spinner>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="block-title alt">
+                <i class="fa fa-angle-down"></i> {{ 'MOBILE'| translate }}</h3>
+            <form action="#" class="form-delivery">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input class="form-control" [(ngModel)]="orderItem.mobile" name="mobile" type="text" placeholder=" {{ 'MOBILE'| translate }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 25px;"></div>
+
+                <h3 class="block-title alt">
+                <i class="fa fa-angle-down"></i> {{ 'ADDRESS'| translate }}</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input class="form-control" [(ngModel)]="orderItem.address" name="address" type="text" placeholder=" {{ 'ADDRESS'| translate }}">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <h3 class="block-title alt">
+                <i class="fa fa-angle-down"></i>{{ 'PAYMENT_METHOD'| translate }}</h3>
+            <div class="panel-group payments-options" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel radio panel-default">
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingMobile">
+                        <h4 class="panel-title">
+                            <a class="collapsed" (click)="choosePaymentMethod('PHONE')" data-toggle="collapse" data-parent="#accordion" href="#collapseMobile"
+                                aria-expanded="false" aria-controls="collapseMobile">
+                                <span class="dot"></span> {{ 'PHONE_NUMBER'| translate }}
+                            </a>
+                            <span class="overflowed pull-left"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseMobile" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMobile">
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingCreditcard">
+                        <h4 class="panel-title">
+                            <a class="collapsed" (click)="choosePaymentMethod('VISA')" data-toggle="collapse" data-parent="#accordion" href="#collapseCreditcard"
+                                aria-expanded="false" aria-controls="collapseCreditcard">
+                                <span class="dot"></span> {{ 'CREDIT_CARD'| translate }}
+                            </a>
+                            <span class="overflowed pull-left">
+                                <img src="assets/img/preview/payments/mastercard-2.jpg" alt="mastercard" />
+                                <img src="assets/img/preview/payments/visa-2.jpg" alt="visa" />
+                                <img src="assets/img/preview/payments/american-express-2.jpg" alt="american-express" />
+                                <img src="assets/img/preview/payments/discovery-2.jpg" alt="discovery" />
+                                <img src="assets/img/preview/payments/eheck-2.jpg" alt="echeck" />
+                            </span>
+                        </h4>
+                    </div>
+                    <div id="collapseCreditcard" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCreditcard">
+                        {{ 'PAY_WITH_VISA_TITLE' | translate }}
+                        <form [formGroup]="creditCardForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input class="form-control" minlength="16" maxlength="16" [(ngModel)]="creditCardItem.card_number" formControlName="card_number" name="card_number" type="number"
+                                        placeholder="{{ 'CARD_NUMBER'| translate }}">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" [(ngModel)]="creditCardItem.csv" minlength="3" maxlength="3" formControlName="csv" name="csv" type="number" placeholder="CSV">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input class="form-control" min="1" max="12" [(ngModel)]="creditCardItem.month" formControlName="month" name="month" type="number" placeholder="MM">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" formControlName="year" name="year" [(ngModel)]="creditCardItem.year" type="number" placeholder="YY">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingPaypal">
+                        <h4 class="panel-title">
+                            <a class="collapsed" (click)="choosePaymentMethod('PAYPAL')" data-toggle="collapse" data-parent="#accordion" href="#collapsePaypal"
+                                aria-expanded="false" aria-controls="collapsePaypal">
+                                <span class="dot"></span> {{ 'PAYPAL'| translate }}
+                            </a>
+                            <span class="overflowed pull-left">
+                                <img src="assets/img/preview/payments/paypal-2.jpg" alt="paypal" />
+                            </span>
+                        </h4>
+                    </div>
+                    <div id="collapsePaypal" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPaypal"></div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!orderFlag">
+                <div class="col-md-12 col-lg-12 text-left-lg">
+                    <span style="color: red">
+                        <ul>
+                            <li *ngFor="let error of errorArray">{{error | translate}}</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="overflowed">
+                <a class="btn btn-theme btn-theme-dark" [title]="host" href="#">{{ 'HOME'| translate }}</a>
+                <a class="btn btn-theme pull-left" title="{{ 'PLACE_ORDER'| translate }}" (click)="placeOrder()">{{ 'PLACE_ORDER'| translate }}</a>
+            </div>
+
+
+
+        </div>
+    </section>
+    <!-- /PAGE -->
+
+    <!-- PAGE -->
+    <promotion-boxes></promotion-boxes>
+    <!-- /PAGE -->
+
+</div>
+<!-- /CONTENT AREA -->
