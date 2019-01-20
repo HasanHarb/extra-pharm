@@ -69,17 +69,17 @@ jQuery(document).ready(function () {
     });
     // Smooth scrolling
     // ----------------------------------------------------------------------------------------
-    $('.sf-menu a, .scroll-to').click(function () {
-        $('.sf-menu a').removeClass('active');
-        $(this).addClass('active');
-        $('html, body').animate({
-            scrollTop: $($(this).attr('href')).offset().top
-        }, {
-            duration: 1200,
-            easing: 'easeInOutExpo'
-        });
-        return false;
-    });
+    // $('.sf-menu a, .scroll-to').click(function () {
+    //     $('.sf-menu a').removeClass('active');
+    //     $(this).addClass('active');
+    //     $('html, body').animate({
+    //         scrollTop: $($(this).attr('href')).offset().top
+    //     }, {
+    //         duration: 1200,
+    //         easing: 'easeInOutExpo'
+    //     });
+    //     return false;
+    // });
     // BootstrapSelect
     // ---------------------------------------------------------------------------------------
     if ($().selectpicker) {

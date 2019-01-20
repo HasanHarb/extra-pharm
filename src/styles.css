@@ -1,3 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+    font-family: 'OpenSansHebrew Regular';
+    src: url('assets/fonts/OpenSansHebrew-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSansHebrew Bold';
+    src: url('assets/fonts/OpenSansHebrew-Bold.ttf');
+}
+@font-face {
+    font-family: 'OpenSansHebrew Light';
+    src: url('assets/fonts/OpenSansHebrew-Light.ttf');
+}
+
+
+@font-face {
+    font-family: 'Bahij Bold';
+    src: url('assets/fonts/bahij/bahij-bold.ttf');
+}
+
+@font-face {
+    font-family: 'Bahij Extra Bold';
+    src: url('assets/fonts/bahij/bahij-extra-bold.ttf');
+}
+
+@font-face {
+    font-family: 'Bahij Extra Light';
+    src: url('assets/fonts/bahij/bahij-extra-light.ttf');
+}
+
+@font-face {
+    font-family: 'Bahij Light';
+    src: url('assets/fonts/bahij/bahij-light.ttf');
+}
+
+body {
+    font-family: 'Bahij Light' !important;
+}
+
+.lang-he body,
+.lang-he h1,
+.lang-he h2,
+.lang-he h3,
+.lang-he h4, 
+.lang-he a,
+.lang-he div,
+.lang-he section{
+    font-family: 'OpenSansHebrew Regular' !important;
+}
+
+.toast-success {
+    /* https://github.com/FortAwesome/Font-Awesome-Pro/blob/master/advanced-options/raw-svg/solid/check.svg */
+    /*background-image: url(svg-encode(svg-factory(theme-color-level('success', 6), '0 0 512 512', "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z")));
+    color: theme-color-level('success', 6);*/
+    background-color: #498dcb !important;
+    border: 1px solid #498dcb !important;
+  }
 

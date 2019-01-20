@@ -91,7 +91,7 @@ export const appRoutes: Routes = [
 	{ path: 'search', component: SearchResultsComponent },
 	{ path: 'thanks', component: ThanksComponent },
 	{ path: 'subscribing-thanks', component: SubscribingThanksComponent },
-	{	path: '404', component: PageNotFoundComponent },
+	{ path: '404', component: PageNotFoundComponent },
 	{ path: ':slug', component: PageComponent },
 	{ path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
