@@ -30,7 +30,8 @@ export class ContactComponent implements OnInit {
 		this.contactForm = this.formBuilder.group({
 			name: ['', [Validators.required, Validators.minLength(3)]],
 			phone_number: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
-			subject: ['', [Validators.required, Validators.minLength(3)]],
+			email: ['', [Validators.required, Validators.pattern(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i), Validators.minLength(3)]],
+ 			subject: ['', [Validators.required, Validators.minLength(3)]],
 			message: ['', [Validators.required, Validators.minLength(5)]]
 		});
 
@@ -56,6 +57,10 @@ export class ContactComponent implements OnInit {
 		}
 		if (this.contactForm.controls['message'].invalid) {
 			this.errorArray.push('CONTACT_MESSAGE_REQUIRED');
+			this.flag = false;
+		}
+		if (this.contactForm.controls['email'].invalid) {
+			this.errorArray.push('CONTACT_EMAIL_REQUIRED');
 			this.flag = false;
 		}
 		if(this.flag)

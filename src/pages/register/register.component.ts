@@ -5,6 +5,7 @@ import { fail } from 'assert';
 import { FacebookService, LoginResponse } from 'ngx-facebook';
 import { InitParams } from 'ngx-facebook/dist/esm/models/init-params';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -18,17 +19,120 @@ export class RegisterComponent implements OnInit {
   host = "";
   email: any;
   cities: any;
+  contactForm: FormGroup;
+  flag = true;
+  errorArray: string[] = [];
 
   constructor(private globals: Globals,
     private router: Router,
     private fb: FacebookService,
+    private formBuilder: FormBuilder,
     private repo: Repo) {
       this.host = window.location.host;
       this.getData();
   }
 
   ngOnInit() {
+    this.contactForm = this.formBuilder.group({
+			first_name: ['', [Validators.required, Validators.minLength(3)]],
+			family_name: ['', [Validators.required, Validators.minLength(3)]],
+			mobile: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
+			email: ['', [Validators.required, Validators.pattern(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i), Validators.minLength(3)]],
+			city_id: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      password2: ['', [Validators.required, Validators.minLength(5)]]      
+		});
   }
+
+  register() {
+    console.log('enter');   
+		this.flag = true;
+		this.errorArray = [];
+		if (this.contactForm.controls['first_name'].invalid) {
+			this.errorArray.push('FIRSTNAME_REQUIRED');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['family_name'].invalid) {
+			this.errorArray.push('FAMILYNAME_REQUIRED');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['mobile'].invalid) {
+			this.errorArray.push('CONTACT_PHONE_NUMBER_REQUIRED');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['email'].invalid) {
+			this.errorArray.push('EMAIL_NOT_VALID');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['city_id'].invalid) {
+			this.errorArray.push('CITYTOWN_REQUIRED');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['address'].invalid) {
+			this.errorArray.push('ADDRESS_REQUIRED');
+			this.flag = false;
+    }
+    if (this.contactForm.controls['password'].invalid) {
+			this.errorArray.push('PASSWORD_REQUIRED');
+			this.flag = false;
+    }
+    if (!this.contactForm.controls['password'].invalid) {
+      console.log('check pass');
+      if (!this.validatePassword(this.contactForm.controls['password'].value)) {
+        console.log("PASSWORD_NOT_VALID");
+        this.errorArray.push("PASSWORD_NOT_VALID");
+        this.flag = false;
+      }
+      console.log(this.flag);
+    }
+    if (this.contactForm.controls['password'].value != this.contactForm.controls['password2'].value) {
+			this.errorArray.push('PASSWORD_NOT_MATCH');
+			this.flag = false;
+    }
+		console.log(this.contactForm.value);
+		if(this.flag)
+		{
+      this.repo.getEmail(this.contactForm.controls['email'].value).subscribe((data: any) => {
+        this.email = data.email;
+        console.log('check email -------');
+        console.log(data);
+        console.log(this.email);
+        if(this.email){
+          this.errorArray.push("USED_EMAIL");
+          this.flag = false;
+          console.log(this.flag);
+        }
+        else {
+          this.repo.register(this.contactForm.value)
+            .subscribe(data => {
+              this.flag = false;
+              if (data == null){
+                this.errorArray.push("REG_ERROR");
+              }
+              else {
+                this.item = data;
+                localStorage.EFUserData = JSON.stringify(data);
+                localStorage.api_token = this.item.api_token;
+                this.router.navigate(['']);
+              }
+            }, err => {
+              if(err._body === '{"email":["The email has already been taken."]}')
+              this.errorArray.push("USED_EMAIL");
+              else
+              this.errorArray.push("REG_ERROR");
+              this.flag = false;
+              console.log(err._body);
+            }, () => this.flag = false
+            );
+        }
+      }, err => {
+        this.errorArray.push("USED_EMAIL");
+        this.flag = false;
+      });
+		}
+		
+	}
 
   getData() {
     this.repo.getCities().subscribe(data => {
@@ -44,8 +148,8 @@ export class RegisterComponent implements OnInit {
     };
 
     this.fb.init(initParams);
-    
-    this.fb.login()
+
+    console.log('Enter');this.fb.login()
     .then((response: LoginResponse) => console.log(response))
     .catch((error: any) => console.error(error));
 
@@ -141,84 +245,5 @@ export class RegisterComponent implements OnInit {
     }
 
     return true;
-}
-
-  doRegister() {
-    this.isLoading = true;
-    if (this.item.email) {
-      if(this.validateEmail(this.item.email)) {
-        let paramsEmail = {
-          email: this.item.email
-        };
-        this.repo.getEmail(paramsEmail).subscribe((data: any) => {
-          this.email = data.email;
-          if(this.email){
-            alert(this.globals.translatefn("USED_EMAIL"));
-            this.isLoading = false;
-          }
-          else if (!this.item.first_name) {
-            alert(this.globals.translatefn("FIRSTNAME_REQUIRED"));
-            this.isLoading = false;
-          }
-          else if (!this.item.family_name) {
-            alert(this.globals.translatefn("FAMILYNAME_REQUIRED"));
-            this.isLoading = false;
-          }
-          else if (!this.item.mobile) {
-            alert(this.globals.translatefn("MOBILE_REQUIRED"));
-            this.isLoading = false;
-          }
-          else if (!this.item.city_id) {
-            alert(this.globals.translatefn("CITYTOWN_REQUIRED"));
-            this.isLoading = false;
-          }
-          else if (!this.item.address) {
-            alert(this.globals.translatefn("ADDRESS_REQUIRED"));
-            this.isLoading = false;
-          }
-          else if (!this.item.password) {
-            alert(this.globals.translatefn("PASSWORD_REQUIRED"));
-            this.isLoading = false;
-          } else if (!this.validatePassword(this.item.password)) {
-            alert(this.globals.translatefn("PASSWORD_NOT_VALID"));
-            this.isLoading = false;
-          }
-          else if (this.item.password != this.item.password2) {
-            alert(this.globals.translatefn("PASSWORD_NOT_MATCH"));
-            this.isLoading = false;
-          }
-          else {
-            this.repo.register(this.item)
-              .subscribe(data => {
-                this.isLoading = false;
-                if (data == null){
-                  alert(this.globals.translatefn("REG_ERROR"));
-                }
-                else {
-                  this.item = data;
-                  localStorage.EFUserData = JSON.stringify(data);
-                  localStorage.api_token = this.item.api_token;
-                  this.router.navigate(['']);
-                }
-              }, err => {
-                this.isLoading = false;
-                alert(err._body);
-              }, () => this.isLoading = false
-              );
-          }
-        }, err => {
-          alert(this.globals.translatefn("USED_EMAIL"));
-          this.isLoading = false;
-        });
-      }
-      else {
-        alert(this.globals.translatefn("EMAIL_NOT_VALID"));
-            this.isLoading = false;
-      }
-    }
-    else {
-      alert(this.globals.translatefn("EMAIL_REQUIRED"));
-          this.isLoading = false;
-    }
   }
 }

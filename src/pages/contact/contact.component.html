@@ -88,6 +88,14 @@
 
                         <div class="outer required">
                             <div class="form-group af-inner">
+                                <label class="sr-only" for="email">{{ 'EMAIL' | translate }}</label>
+                                <input type="text" type="email" name="email" id="email" placeholder="{{ 'EMAIL'| translate }}" value="" size="30" data-toggle="tooltip"
+                                    title="Email is required" class="form-control placeholder" formControlName="email" />
+                            </div>
+                        </div>
+
+                        <div class="outer required">
+                            <div class="form-group af-inner">
                                 <label class="sr-only" for="subject">{{ 'CONTACT_SUBJECT' | translate }}</label>
                                 <input type="text" name="subject" id="subject" placeholder="{{ 'CONTACT_SUBJECT'| translate }}" value="" size="30" data-toggle="tooltip"
                                     title="Subject is required" class="form-control placeholder" formControlName="subject" />
