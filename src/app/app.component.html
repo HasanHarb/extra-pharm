@@ -101,7 +101,7 @@
                   <li class="hidden-xs">
                       <a routerLink="contact-us" title="{{ 'CONTACT' | translate }}">{{ 'CONTACT' | translate }}</a>
                   </li>
-                  <li class="hidden-xs">
+                  <li class="hidden-xs" *ngIf="loggedIn">
                       <a routerLink="favorites" title="{{ 'FAVORITES' | translate }}">{{ 'FAVORITES' | translate }}</a>
                   </li>
                   <li class="dropdown flags langs">
