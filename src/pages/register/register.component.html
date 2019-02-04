@@ -21,32 +21,32 @@
                         <span>{{ 'REGISTER' | translate }}</span>
                     </h3>
 
-                    <form action="#" class="form-login">
+                    <form  [formGroup]="contactForm" (ngSubmit)="register()" class="form-login">
                         <div class="row">                            
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="first_name" type="text" [(ngModel)]="item.first_name" placeholder="{{ 'FIRST_NAME' | translate }}">
+                                    <input class="form-control" name="first_name" id="first_name" formControlName="first_name" type="text" placeholder="{{ 'FIRST_NAME' | translate }}">
                                 </div>
                             </div>                        
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="family_name" type="text" [(ngModel)]="item.family_name" placeholder="{{ 'FAMILY_NAME' | translate }}">
+                                    <input class="form-control" name="family_name" id="family_name" formControlName="family_name" type="text" placeholder="{{ 'FAMILY_NAME' | translate }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="mobile" type="text" [(ngModel)]="item.mobile" placeholder="{{ 'MOBILE' | translate }}">
+                                    <input class="form-control" name="mobile" id="mobile" formControlName="mobile" type="text" placeholder="{{ 'MOBILE' | translate }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="email" type="email" required [(ngModel)]="item.email" placeholder="{{ 'EMAIL' | translate }}">
+                                    <input class="form-control" name="email" type="email" formControlName="email" required placeholder="{{ 'EMAIL' | translate }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <select name="city_id" class="form-control" [(ngModel)]="item.city_id"  style="color: black" >
-                                        <option [ngValue]="undefined" disabled  selected hidden > {{ 'CITYTOWN' | translate }} </option>
+                                    <select name="city_id" id="city_id" class="form-control" formControlName="city_id"  style="color: black" >
+                                        <option [ngValue]="undefined" disabled  selected > {{ 'CITYTOWN' | translate }} </option>
                                         <option *ngFor=" let city of cities" value="{{city.id}}">{{city.name}}</option>
                                     </select>
                                 </div>
@@ -54,27 +54,36 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="address" [(ngModel)]="item.address" placeholder="{{ 'ADDRESS' | translate }}">
+                                    <input class="form-control" name="address" id="address" formControlName="address" placeholder="{{ 'ADDRESS' | translate }}">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="password" type="password" [(ngModel)]="item.password" placeholder="{{ 'PASSWORD' | translate }}">
+                                    <input class="form-control" name="password" id="password" type="password" formControlName="password" placeholder="{{ 'PASSWORD' | translate }}">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="password2" type="password" [(ngModel)]="item.password2" placeholder="{{ 'CONFIRM_PASSWORD' | translate }}">
+                                    <input class="form-control" name="password2" id="password2" type="password" formControlName="password2" placeholder="{{ 'CONFIRM_PASSWORD' | translate }}">
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="!flag">
+                                <div class="col-md-12 col-lg-12 text-left-lg">
+                                    <span style="color: red">
+                                        <ul>
+                                            <li *ngFor="let error of errorArray">{{error | translate}}</li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <input type="submit" class="btn btn-theme btn-block btn-theme-dark" (click)="doRegister()" value="{{ 'CREATE_EF_ACCOUNT' | translate }}">
+                                <input type="submit" class="btn btn-theme btn-block btn-theme-dark" value="{{ 'CREATE_EF_ACCOUNT' | translate }}">
                             </div>
-                            <div class="col-md-6 col-lg-6">
+                            <!-- <div class="col-md-6 col-lg-6">
                                 <button class="btn btn-theme btn-block btn-icon-left facebook" (click)="loginWithFB()"><i class="fa fa-facebook"></i>{{ 'SIGN_IN_WITH_FB' | translate }}</button>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
@@ -85,7 +94,7 @@
                     <form action="#" class="create-account">
                         <div class="row">                                               
                             <div class="col-md-6">
-                                <a [title]="host + '/login'" class="btn btn-block btn-theme btn-theme-dark btn-create" href="/login">{{ 'LOGIN' | translate }}</a>
+                                <a [title]="host + '/login'" class="btn btn-block btn-theme btn-theme-dark btn-create" routerLink="/login">{{ 'LOGIN' | translate }}</a>
                             </div>
                         </div>
                     </form>

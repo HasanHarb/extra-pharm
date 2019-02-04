@@ -95,25 +95,15 @@ export class CartComponent implements OnInit {
 				}
 			}
 			if (this.orderFlag) {
-				this.orderItem.products = this.activeItemsInCart;
+				this.orderItem.products = this.cart.getCart();
 				this.orderItem.coupon = this.couponItem.key;
+				if (this.outInvItemsInCart.length > 0) {
+					this.orderItem.is_special= "yes";
+					this.orderItem.notes= "Special Order (out of stock)";
+				}
 				this.busy = this.repo.placeOrder(this.orderItem).subscribe(data => {
-					if (this.outInvItemsInCart.length > 0) {
-						let orderItemsOut = {
-							products: this.outInvItemsInCart,
-							notes: "Special Order (out of stock)",
-							is_special: "yes"
-						}
-						this.repo.placeOrder(orderItemsOut).subscribe(dataout => {
-							this.cart.clearCart();
-							this.router.navigate(['thanks'], { queryParams: { orderId: data.id }});
-						});
-					}
-					else {
-						this.cart.clearCart();
-						this.router.navigate(['thanks'], { queryParams: { orderId: data.id }});
-					}
-
+					this.cart.clearCart();
+					this.router.navigate(['thanks'], { queryParams: { orderId: data.id }});
 				});
 			}
 		}
