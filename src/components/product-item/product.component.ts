@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import {Http} from '@angular/http';
 import { Globals } from '../../services/globals.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -52,8 +53,8 @@ export class ProductItemComponent implements OnInit {
 		private repo: Repo,
 		private translate: TranslateService,
 		private toastr: ToastrService,
-		private http: Http,
 		private globals: Globals,
+		private router: Router
 				
 	) {
 	}
@@ -110,10 +111,34 @@ export class ProductItemComponent implements OnInit {
 				is_special: "YES"
 			}
 
-			this.repo.placeOrder(orderItems).subscribe(data => {								
+			this.repo.placeOrder(orderItems).subscribe(data => {
+				this.router.navigate(['my-orders/' + data.id]);
 			});
 		}
 	}
+	/**
+	 * specialOrder
+	 * Order products that not in inventory
+	 */
+	// specialOrder() {
+
+	// 	var products = [];
+	// 	products.push({
+	// 		id: this.product.id,
+	// 		product: this.product,
+	// 		quantity: 1,
+	// 		type: this.selectedType
+	// 	});
+	// 	var orderItems = {
+	// 		products: products,
+	// 		notes: this.specialNotes,
+	// 		is_special: "YES"
+	// 	}
+
+	// 	this.busy = this.repo.placeOrder(orderItems).subscribe(data => {
+	// 		this.router.navigate(['my-orders/' + data.id]);
+	// 	});
+	// }
 
 	sepecialAlert() {
 		if (!this.repo.isLoggedIn()) {

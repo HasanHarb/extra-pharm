@@ -34,8 +34,11 @@
                 <a class="btn btn-theme btn-theme-transparent"  [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
                     <i class="fa fa-heart"></i>
                 </a>
-                <a class="btn btn-theme btn-theme-transparent btn-icon-left" [ngClass]="{'in-cart' : inCart(product)}"  (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                <a *ngIf="!cartPage && product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left" [ngClass]="{'in-cart' : inCart(product)}"  (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}
+                </a> 
+                <a *ngIf="!cartPage && !product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left"  (click)="specialOrder()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                    {{ 'SPECIAL_ORDER' | translate }}
                 </a>                
             </div>
         </div>
