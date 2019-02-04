@@ -81,9 +81,9 @@
                             <div class="col-md-6">
                                 <input type="submit" class="btn btn-theme btn-block btn-theme-dark" value="{{ 'CREATE_EF_ACCOUNT' | translate }}">
                             </div>
-                            <div class="col-md-6 col-lg-6">
+                            <!-- <div class="col-md-6 col-lg-6">
                                 <button class="btn btn-theme btn-block btn-icon-left facebook" (click)="loginWithFB()"><i class="fa fa-facebook"></i>{{ 'SIGN_IN_WITH_FB' | translate }}</button>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
@@ -94,7 +94,7 @@
                     <form action="#" class="create-account">
                         <div class="row">                                               
                             <div class="col-md-6">
-                                <a [title]="host + '/login'" class="btn btn-block btn-theme btn-theme-dark btn-create" href="/login">{{ 'LOGIN' | translate }}</a>
+                                <a [title]="host + '/login'" class="btn btn-block btn-theme btn-theme-dark btn-create" routerLink="/login">{{ 'LOGIN' | translate }}</a>
                             </div>
                         </div>
                     </form>

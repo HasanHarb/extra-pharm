@@ -44,9 +44,9 @@
                             <div class="col-md-6">
                                 <input type="submit" class="btn btn-theme btn-block btn-theme-dark" (click)="doLogin()" value="{{ 'LOGIN' | translate }}">
                             </div>
-                            <div class="col-md-6 col-lg-6">
+                            <!-- <div class="col-md-6 col-lg-6">
                                 <button class="btn btn-theme btn-block btn-icon-left facebook" (click)="loginWithFB()"><i class="fa fa-facebook"></i>{{ 'SIGN_IN_WITH_FB' | translate }}</button>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                    
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-6">
-                                <a class="btn btn-block btn-theme btn-theme-dark btn-create" [title]="host + '/register'" href="/register">{{ 'CREATE_EF_ACCOUNT' | translate }}</a>
+                                <a class="btn btn-block btn-theme btn-theme-dark btn-create" [title]="host + '/register'" routerLink="/register">{{ 'CREATE_EF_ACCOUNT' | translate }}</a>
                             </div>
                         </div>
                     </form>
