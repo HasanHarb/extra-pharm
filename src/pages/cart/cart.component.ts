@@ -176,13 +176,7 @@ export class CartComponent implements OnInit {
 	}
 
 	resolvePrices(item) {
-		let type = null;
-		if (item.product.product_types) {
-			type = item.product.product_types.find(x => x.is_default == 1) || item.product.product_types[0];
-		}
-		let price = type != null && type.price > 0 ? type.price : item.product.regular_price;
-		return parseFloat(((price - (price * item.product.sale / 100))).toFixed(2));
-
+		return item.type.price;
 	}
 
 	remove(product, source = 'in') {
