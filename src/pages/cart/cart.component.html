@@ -63,7 +63,7 @@
                         <tbody>
                             <tr *ngFor="let item of activeItemsInCart">
                                 <td class="image">
-                                    <a class="media-link" href="#" title="#">
+                                    <a class="media-link" routerLink="/product/{{ item.product.id }}" title="#">
                                         <i class="fa fa-plus"></i>
                                         <img width="70px" src="{{ item.product.image }}" alt="{{ (item.product | localize:'title') || product.title }}" />
                                     </a>
@@ -81,7 +81,7 @@
                                 </td>
                                 <td class="description">
                                     <h4>
-                                        <a href="#" title="{{ (item.product | localize:'title') || item.product.title }}">{{ (item.product | localize:'title') || item.product.title }}</a>
+                                        <a routerLink="/product/{{ item.product.id }}" title="{{ (item.product | localize:'title') || item.product.title }}">{{ (item.product | localize:'title') || item.product.title }}</a>
                                     </h4>
                                 </td>
                                 <td class="color">

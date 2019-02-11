@@ -36,9 +36,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of favorites; let i = index;">
-                                <td class="image"><a class="media-link" title="#" href="#"><i class="fa fa-plus"></i><img src="{{ item.image }}" alt="{{ (item | localize:'title') || item.title }}" width="105" height="115"></a></td>
+                                <td class="image"><a class="media-link" title="#" routerLink="/product/{{ item.id }}"><i class="fa fa-plus"></i><img src="{{ item.image }}" alt="{{ (item | localize:'title') || item.title }}" width="105" height="115"></a></td>
                                 <td class="description">
-                                    <h4><a title="{{ (item | localize:'title') || item.title }}" href="#">{{ (item | localize:'title') || item.title }}</a></h4>
+                                    <h4><a title="{{ (item | localize:'title') || item.title }}" routerLink="/product/{{ item.id }}">{{ (item | localize:'title') || item.title }}</a></h4>
                                 </td>
                                 <td class="price">{{ item.regular_price }} ₪</td>
                                 <td class="add">
