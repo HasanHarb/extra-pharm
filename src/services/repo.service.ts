@@ -33,11 +33,11 @@ export class Repo {
 
     getAds(product_id = 0)
     {
-        return this.http.get(url + 'ads' + (product_id ? ('/' + product_id) : '')).map(res => res.json());        
+        return this.http.get(url + 'ads' + (product_id ? ('/' + product_id) : '')).map(res => res.json());
     }
 
     refreshCartProducts(items)
-    {        
+    {
         return this.http.post(url + 'post/refresh-cart', {data: items}, this.options).map(res => res.json());
 
     }
@@ -74,7 +74,7 @@ export class Repo {
             });
 
             return products;
-        }); 
+        });
     }
     getTopProducts(){
         return this.http.get(url + 'products-groups').map(res => {
@@ -83,7 +83,7 @@ export class Repo {
                 response[type].forEach(product => {
                     product.image = Config.StorageUrl + product.image
                 });
-            }           
+            }
             return response;
         });
     }
@@ -91,17 +91,21 @@ export class Repo {
     getCategoriezedProducts(){
         return this.http.get(url + 'categorized-products').map(res => {
             let _res = res.json();
-            _res.forEach(item => {                
+            _res.forEach(item => {
                 item.products.forEach(product => {
-                    product.image = Config.StorageUrl + product.image 
-                });                
+                    product.image = Config.StorageUrl + product.image
+                });
             });
             return _res;
         });
     }
 
     getCategory(data){
-        return this.http.get(url + 'category-details', {params: data} ).map(res => res.json());
+        return this.http.get(url + 'category-details', {params: data} ).map(res => {
+          let result = res.json();
+          if(result.banner) result.banner = Config.StorageUrl + result.banner;
+          return result;
+        });
     }
 
     getEmail(data)
@@ -121,7 +125,7 @@ export class Repo {
             });
 
             return products;
-        }); 
+        });
     }
 
     getSliders (data) {
@@ -167,7 +171,7 @@ export class Repo {
 
     getUserData()
     {
-        return this.http.get(url + 'user?api_token=' + localStorage.api_token).map(res => res.json());        
+        return this.http.get(url + 'user?api_token=' + localStorage.api_token).map(res => res.json());
     }
 
     updateMyProfile(item) {
@@ -183,14 +187,14 @@ export class Repo {
 
     isLoggedIn(): any {
         return localStorage.api_token ? true : false;
-/*        
+/*
         if (localStorage.api_token != "null" && localStorage.api_token != "undefined")
         {
             this.getUserData().subscribe(data => {
                 if(data.id == null)
                 return false;
                 else
-                return true;                
+                return true;
             },
             err=>
             {
@@ -222,7 +226,7 @@ export class Repo {
         return this.http.get(url + 'products/types', {params: params}).map(res => res.json());
     }
 
-    getLanguages(){        
+    getLanguages(){
         return this.http.get(url + 'languages').map(res => res.json());
     }
 

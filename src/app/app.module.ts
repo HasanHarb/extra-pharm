@@ -26,7 +26,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TopTenComponent } from '../pages/top-ten/top-ten.component';
 import { SearchResultsComponent } from '../pages/search-results/search-results.component';
 import { SubscribingThanksComponent } from '../pages/subscribing-thanks/subscribing-thanks.component';
-import { PageNotFoundComponent }   from '../pages/not-found/not-found.component';
+import { PageNotFoundComponent } from '../pages/not-found/not-found.component';
 import { TermsComponent } from '../pages/terms/terms.component';
 
 // components
@@ -42,7 +42,7 @@ import { Cart } from '../services/cart.service';
 import { Favorites } from '../services/favorites.service';
 import { Globals } from '../services/globals.service';
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomFormsModule } from 'ng2-validation';
 
 
@@ -110,10 +110,10 @@ export function createTranslateLoader(http: HttpClient) {
 		TermsComponent
 	],
 	imports: [
-    NgxImageZoomModule.forRoot(),
+		NgxImageZoomModule.forRoot(),
 		ConfirmationPopoverModule.forRoot({
 			confirmButtonType: 'danger' // set defaults here
-		  }),
+		}),
 		SpinnerModule,
 		BusyModule,
 		FacebookModule.forRoot(),

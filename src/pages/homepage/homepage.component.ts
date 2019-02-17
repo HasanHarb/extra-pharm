@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Repo } from '../../services/repo.service';
 import { Config } from "../../config";
 
-
-
 @Component({
 	selector: 'app-homepage',
 	templateUrl: './homepage.component.html',
@@ -15,22 +13,18 @@ export class HomepageComponent implements OnInit {
 	topRatedProducts: any;
 	categories: any = [];
 	mainCategories: any;
-	threeCate: any ;
+	threeCate: any;
 	firstCategory: any = <any>{};
 	imagesUrlBase: string;
 	mainSliderOptions: any;
 	topRatedCarouselOptions: any;
-
 	topTenProducts: any;
 	topFourProducts: any = [];
-
 	topCategorizedProducts: any;
 	host = "";
 
-	constructor(public repo: Repo) {	
-		
+	constructor(public repo: Repo) {
 		this.host = window.location.host;
-		
 		this.mainSliderOptions = {
 			rtl: true,
 			autoplay: false,
@@ -84,44 +78,45 @@ export class HomepageComponent implements OnInit {
 
 	ngOnInit() {
 		this.imagesUrlBase = Config.StorageUrl;
-
 	}
 
-	getSliders(){
-		this.repo.getSliders({ place: 'home', media: 'desktop' }).subscribe((sliders: any) => {						
+	getSliders() {
+		this.repo.getSliders({ place: 'home', media: 'desktop' }).subscribe((sliders: any) => {
 			this.sliders = sliders.data;
 		});
 	}
 
-	getCenterBanners(){
+	getCenterBanners() {
 		this.repo.getCenterBanners({ position: 2 }).subscribe((banners: any) => {
 			this.centerBanners = banners;
 		});
 	}
 
-	getTopTen(){
-		this.repo.getTopTen().subscribe((data: any) => {			
-            if (data.data){
+	getTopTen() {
+		this.repo.getTopTen().subscribe((data: any) => {
+			if (data.data) {
 				this.topTenProducts = data.data;
 			}
-        });
-	}	
+		});
+	}
+
 	getCategories() {
 		this.repo.getHomeCategories().subscribe((data: any) => {
-		if (data) {
-			this.firstCategory  = data[0];
-			this.threeCate = data;
-		}
+			if (data) {
+				this.firstCategory = data[0];
+				this.threeCate = data;
+			}
 		});
-  }
-	getTopFourProducts(){
-		this.repo.getTopProducts().subscribe((items:any) => {			
+	}
+
+	getTopFourProducts() {
+		this.repo.getTopProducts().subscribe((items: any) => {
 			this.topFourProducts = items;
 		});
 	}
 
-	getCategorizedProducts(){
-		this.repo.getCategoriezedProducts().subscribe((items:any) => {
+	getCategorizedProducts() {
+		this.repo.getCategoriezedProducts().subscribe((items: any) => {
 			this.topCategorizedProducts = items;
 		})
 	}

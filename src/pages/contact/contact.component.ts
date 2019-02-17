@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContactUsData } from '../../models/models';
 import { Repo } from '../../services/repo.service';
-import { Config } from '../../config';
-import { CustomValidators } from 'ng2-validation';
 import { Globals } from '../../services/globals.service';
 
 @Component({
@@ -72,6 +70,6 @@ export class ContactComponent implements OnInit {
 				}
 			});
 		}
-		
+
 	}
 }

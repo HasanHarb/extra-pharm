@@ -46,7 +46,8 @@ export class ProductComponent implements OnInit {
 	// product price after sale
 	priceAfterSale: number = 0;
 	priceAsString: string[];
-	showBrandInTitle: boolean = false;
+  showBrandInTitle: boolean = false;
+  brand: string;
 	// attrs indicator
 	showAttrs: boolean = false;
 	// busy indicator
@@ -161,7 +162,8 @@ export class ProductComponent implements OnInit {
 		this.repo.getProduct(this.productId).subscribe((data: any) => {
 			this.productBusy = false;
 
-			this.product = data.product;
+      this.product = data.product;
+      this.brand = data.attrs['الماركة'].name;
 			// set image
 			this.product.image = this.imagesUrlBase + this.product.image;
 			this.productImage = this.product.image;

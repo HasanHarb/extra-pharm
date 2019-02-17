@@ -3,7 +3,6 @@ import { Cart } from '../../services/cart.service';
 import { Config } from '../../config';
 import { ToastrService } from 'ngx-toastr';
 import { Repo } from '../../services/repo.service';
-import { Globals } from '../../services/globals.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -28,17 +27,16 @@ export class CartComponent implements OnInit {
 	creditCardItem: any = <any>{};
 	creditCardForm: FormGroup;
 
-  errorArray: string[] = [];
-  host = "";
+	errorArray: string[] = [];
+	host = "";
 
 	constructor(private cart: Cart,
 		private repo: Repo,
-		private globals: Globals,
 		private router: Router,
 		private formBuilder: FormBuilder,
 		private toastr: ToastrService) {
 
-      	this.host = window.location.host;
+		this.host = window.location.host;
 		this.activeItemsInCart = this.cart.getCart().filter(x => x.product.in_stock);
 		this.outInvItemsInCart = this.cart.getCart().filter(x => !x.product.in_stock);
 		this.refeshCartItems();
@@ -98,12 +96,12 @@ export class CartComponent implements OnInit {
 				this.orderItem.products = this.cart.getCart();
 				this.orderItem.coupon = this.couponItem.key;
 				if (this.outInvItemsInCart.length > 0) {
-					this.orderItem.is_special= "yes";
-					this.orderItem.notes= "Special Order (out of stock)";
+					this.orderItem.is_special = "yes";
+					this.orderItem.notes = "Special Order (out of stock)";
 				}
 				this.busy = this.repo.placeOrder(this.orderItem).subscribe(data => {
 					this.cart.clearCart();
-					this.router.navigate(['thanks'], { queryParams: { orderId: data.id }});
+					this.router.navigate(['thanks'], { queryParams: { orderId: data.id } });
 				});
 			}
 		}
@@ -180,7 +178,7 @@ export class CartComponent implements OnInit {
 	}
 
 	remove(product, source = 'in') {
-		this.cart.removeFromCart(product); //Nav parm when move form view to onther, We called a function attributes 
+		this.cart.removeFromCart(product); //Nav parm when move form view to onther, We called a function attributes
 		if (source == "in") {
 			var index = this.activeItemsInCart.indexOf(product);
 			if (index > -1) {

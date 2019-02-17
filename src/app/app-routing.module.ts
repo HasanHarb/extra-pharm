@@ -30,40 +30,38 @@ import { MyFavouritesComponent } from '../pages/my-fav/my-fav.component';
 import { OrderComponent } from '../pages/order/order.component';
 import { PageComponent } from '../pages/page/page.component';
 import { SubscribingThanksComponent } from '../pages/subscribing-thanks/subscribing-thanks.component';
-import { PageNotFoundComponent }   from '../pages/not-found/not-found.component';
+import { PageNotFoundComponent } from '../pages/not-found/not-found.component';
 
 @Injectable()
 export class LoggedInUser implements CanActivate {
-  constructor(private repo: Repo, private router: Router) {}
+	constructor(private repo: Repo, private router: Router) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean>|Promise<boolean>|boolean {
-	  let result = this.repo.isLoggedIn();
-	  if(!result)
-	  {
+	canActivate(
+		route: ActivatedRouteSnapshot,
+		state: RouterStateSnapshot
+	): Observable<boolean> | Promise<boolean> | boolean {
+		let result = this.repo.isLoggedIn();
+		if (!result) {
 			this.router.navigate(['/login']);
-	  }
-	  return result;
-  }
+		}
+		return result;
+	}
 }
 
 @Injectable()
 export class LoggedOutUser implements CanActivate {
-  constructor(private repo: Repo, private router: Router) {}
+	constructor(private repo: Repo, private router: Router) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean>|Promise<boolean>|boolean {
-	  let result = !this.repo.isLoggedIn();
-	  if(!result)
-	  {
-		this.router.navigate(['/homepage']);
-	  }
-	  return result;
-  }
+	canActivate(
+		route: ActivatedRouteSnapshot,
+		state: RouterStateSnapshot
+	): Observable<boolean> | Promise<boolean> | boolean {
+		let result = !this.repo.isLoggedIn();
+		if (!result) {
+			this.router.navigate(['/homepage']);
+		}
+		return result;
+	}
 }
 
 export const appRoutes: Routes = [
@@ -86,7 +84,7 @@ export const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent, canActivate: [LoggedOutUser] },
 	{ path: 'login/:component', component: LoginComponent, canActivate: [LoggedOutUser] },
 	{ path: 'reset-password', component: ResetPasswordComponent, canActivate: [LoggedOutUser] },
-	{ path: 'cart', component: CartComponent },	
+	{ path: 'cart', component: CartComponent },
 	{ path: 'top-ten', component: TopTenComponent },
 	{ path: 'search', component: SearchResultsComponent },
 	{ path: 'thanks', component: ThanksComponent },

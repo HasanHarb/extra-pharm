@@ -51,3 +51,10 @@ spinner {
   margin: 10px 0;
   font-size: 12px;
 }
+
+.brand {
+  font-size: 15px;
+}
+.name {
+  font-size: 20px;
+}

@@ -31,7 +31,8 @@
                         </div>
                     </div>
                     <h2 class="product-title">
-                        {{ (product | localize:'title') || product.title }}
+                        <span class="brand">{{ brand }}</span><br>
+                        <span class="name">{{ (product | localize:'title') || product.title }}</span>
                         <span *ngIf="attrs.Company">- {{ (attrs.Company | localize:'name') || attrs.Company.name }}</span>
                     </h2>
 
@@ -93,9 +94,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="attrs-list">
-                                    <li *ngIf="product.sku">
+                                    <li *ngIf="product.yarpa_code">
                                         <strong>{{ 'YARPA_CODE' | translate }}: </strong>
-                                        <span>{{ product.sku }}</span>
+                                        <span>{{ product.yarpa_code }}</span>
                                     </li>
                                     <li *ngIf="categorySlug">
                                         <strong>{{ 'CATEGORY' | translate }}: </strong>

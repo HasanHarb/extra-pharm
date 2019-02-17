@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Repo } from '../../services/repo.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class PageComponent implements OnInit {
 	ngOnInit() {
 		this.getTopFourProducts();
 		this.route.params.subscribe(params => {
-			this.repo.getPage(params['slug']).subscribe((page:any) => {
+			this.repo.getPage(params['slug']).subscribe((page: any) => {
 				if (page.id) {
 					this.content = page;
 				} else {
@@ -29,8 +29,8 @@ export class PageComponent implements OnInit {
 		});
 	}
 
-	getTopFourProducts(){
-		this.repo.getTopProducts().subscribe((items:any) => {			
+	getTopFourProducts() {
+		this.repo.getTopProducts().subscribe((items: any) => {
 			this.topFourProducts = items;
 		});
 	}

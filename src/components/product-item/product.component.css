@@ -54,7 +54,7 @@
     z-index: 10;
     width: 60px;
     height: 60px;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 }
@@ -80,4 +80,8 @@
 .decimal {
     position: relative;
     top: -7px;
+}
+
+.product-item-holder {
+
 }

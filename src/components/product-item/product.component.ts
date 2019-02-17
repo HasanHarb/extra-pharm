@@ -6,7 +6,6 @@ import { Config } from "../../config";
 import { Repo } from '../../services/repo.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import {Http} from '@angular/http';
 import { Globals } from '../../services/globals.service';
 import { Router } from '@angular/router';
 
@@ -20,7 +19,7 @@ export class ProductItemComponent implements OnInit {
 	busy: Promise<any>;
 	// col
 	@Input() col: any = 'col-md-3 col-sm-6';
-	// template 
+	// template
 	@Input() template: any = 'larg';
 	// navId
 	@Input() navId: number;
@@ -47,15 +46,15 @@ export class ProductItemComponent implements OnInit {
 	// assets url
 	imagesUrlBase = Config.StorageUrl;
 
-	constructor(		
-		private fav: Favorites,				
+	constructor(
+		private fav: Favorites,
 		private cart: Cart,
 		private repo: Repo,
 		private translate: TranslateService,
 		private toastr: ToastrService,
 		private globals: Globals,
 		private router: Router
-				
+
 	) {
 	}
 
@@ -84,17 +83,17 @@ export class ProductItemComponent implements OnInit {
 	 * Order products that not in inventory
 	 */
 	addedFav() {
-		if(this.inFav() == true) {
-			this.toastr.success(this.globals.translatefn("DONE"),  this.globals.translatefn("SUCCEDD_ADDED_FAV"));
-		} 
+		if (this.inFav() == true) {
+			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("SUCCEDD_ADDED_FAV"));
+		}
 		else {
 			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("SUCCEDD_REMOVED_FAV"));
 		}
-  	}
+	}
 	addedCart() {
-		if(this.inCart(this.product) == true) {
+		if (this.inCart(this.product) == true) {
 			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("IN_CART"));
-		} 
+		}
 		else {
 			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("OUT_CART"));
 		}
@@ -102,7 +101,7 @@ export class ProductItemComponent implements OnInit {
 	specialOrder(notes = "") {
 		if (!this.repo.isLoggedIn()) {
 			//
-		} else {						
+		} else {
 			var products = [];
 			products.push(this.prepareCartItem(this.product));
 			var orderItems = {
@@ -143,7 +142,7 @@ export class ProductItemComponent implements OnInit {
 	sepecialAlert() {
 		if (!this.repo.isLoggedIn()) {
 			// this.globals.loginRegisterAlert(this.navCtrl, ProductsPage, { id: this.product.category_id, product_id: this.product.id });
-		} else {			
+		} else {
 
 		}
 	}
@@ -191,13 +190,13 @@ export class ProductItemComponent implements OnInit {
 	/**
 	 * inCart
 	 * Check if product has been added to cart or not
-	 * @param product 
+	 * @param product
 	 */
 	inCart(product) {
 		var inCart = this.cartItem ? true : this.cart.inCart(product);
 		return inCart;
 	}
-	
+
 
 	/**
 	 * addToCart
@@ -216,13 +215,13 @@ export class ProductItemComponent implements OnInit {
 			var cartItem = this.prepareCartItem(this.product);
 			this.cart.addToCart(cartItem);
 			this.addedCart();
-		}		
+		}
 	}
 
 	/**
 	 * removeFromCart
 	 * Remove product from cart
-	 * @param product 
+	 * @param product
 	 */
 	removeFromCart(product) {
 		this.cart.removeFromCart(product);
@@ -232,7 +231,7 @@ export class ProductItemComponent implements OnInit {
 	/**
 	 * prepareCartItem
 	 * Prepare product in order to add it to cart
-	 * @param product 
+	 * @param product
 	 */
 	prepareCartItem(product: ProductData) {
 		let cartItem = <CartItemData>{

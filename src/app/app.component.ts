@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Repo } from '../services/repo.service';
 import { NavigationEnd } from '@angular/router';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Globals } from '../services/globals.service';
 import { Cart } from '../services/cart.service';
 
@@ -17,7 +17,7 @@ export class AppComponent {
 	lang: any = localStorage.selectedLang || 'ar';
 	languages: any;
 	searchKey: string = "";
-	threeCate: any ;
+	threeCate: any;
 	menuStatus: boolean = false;
 	content: any;
 	selectedLanguageName: any;
@@ -26,12 +26,12 @@ export class AppComponent {
 	user: any = <any>{};
 
 	newsletterEmail = "";
-	subscribeForm: FormGroup;	
+	subscribeForm: FormGroup;
 	subscribeError = false;
 	subscribeErrorText = "";
 
 	busy: any;
-	settings : any;
+	settings: any;
 
 	constructor(
 		public repo: Repo,
@@ -49,19 +49,19 @@ export class AppComponent {
 			this.settings = data;
 		});
 
-		this.repo.getAbout().subscribe((page:any) => {
-				this.content = page;
+		this.repo.getAbout().subscribe((page: any) => {
+			this.content = page;
 		});
 		router.events.subscribe((val) => {
-			if(val instanceof NavigationEnd){
-				if(!val.urlAfterRedirects.includes('search')){
+			if (val instanceof NavigationEnd) {
+				if (!val.urlAfterRedirects.includes('search')) {
 					this.searchKey = null;
 				}
 			}
 		});
 
 		this.loggedIn = repo.isLoggedIn();
-		if(this.loggedIn) {
+		if (this.loggedIn) {
 			this.repo.getUserData().subscribe(data => {
 				if (data.api_token == null)
 					this.logout();
@@ -69,7 +69,7 @@ export class AppComponent {
 					localStorage.EFUserData = JSON.stringify(data);
 					localStorage.api_token = data.api_token;
 					this.user = data;
-				}			
+				}
 			});
 		}
 		//this.translate.setDefaultLang('ar');
@@ -82,15 +82,14 @@ export class AppComponent {
 		this.getCategories();
 
 		this.router.events.subscribe((evt) => {
-            if (!(evt instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0)
-        });
+			if (!(evt instanceof NavigationEnd)) {
+				return;
+			}
+			window.scrollTo(0, 0)
+		});
 	}
 
-	postSubscriber()
-	{
+	postSubscriber() {
 		this.subscribeError = false;
 		this.subscribeErrorText = "";
 
@@ -98,9 +97,8 @@ export class AppComponent {
 			this.subscribeErrorText = 'CONTACT_EMAIL_REQUIRED';
 			this.subscribeError = true;
 		}
-		else
-		{
-			this.busy = this.repo.postSubscriber({email: this.newsletterEmail}).subscribe(data => {
+		else {
+			this.busy = this.repo.postSubscriber({ email: this.newsletterEmail }).subscribe(data => {
 				if (data.id != null) {
 					this.newsletterEmail = "";
 					this.subscribeForm.reset();
@@ -119,10 +117,9 @@ export class AppComponent {
 
 	}
 
-	refreshLoggedIn()
-	{
+	refreshLoggedIn() {
 		this.loggedIn = this.repo.isLoggedIn();
-		if(this.loggedIn)
+		if (this.loggedIn)
 			this.user = JSON.parse(localStorage.EFUserData);
 		return this.loggedIn;
 	}
@@ -144,16 +141,16 @@ export class AppComponent {
 		this.router.navigate(['']);
 	}
 
-	submitSearch(){
+	submitSearch() {
 		this.router.routeReuseStrategy.shouldReuseRoute = function () {
 			return false;
-		  };
+		};
 		this.router.navigate(['/search'], { queryParams: { q: this.searchKey } });
 	}
 
-    getCartLength(){
+	getCartLength() {
 		return this.cart.getCart().length;
-    }
+	}
 
 
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Repo } from '../../services/repo.service';
 import { Router } from '@angular/router';
-import { Globals } from '../../services/globals.service';
 
 @Component({
 	selector: 'my-orders',
@@ -13,12 +12,10 @@ export class MyOrdersComponent implements OnInit {
 	user: any = <any>{};
 	email: string = "";
 	busy: any;
-
 	items = [];
 	selectedOrder: any = <any>{};
 	page = 1;
 	pages = [];
-
 	host = "";
 
 	statusList: any = [
@@ -30,10 +27,7 @@ export class MyOrdersComponent implements OnInit {
 		{ status: 'CANCEL', icon: 'assets/orders/deliver', class: 'done' },
 	];
 
-	constructor(private repo: Repo,
-		private globals: Globals,
-		private router: Router) {
-
+	constructor(private repo: Repo, private router: Router) {
 		this.host = window.location.host;
 		this.getItems();
 	}
@@ -55,8 +49,7 @@ export class MyOrdersComponent implements OnInit {
 
 		this.repo.getMyOrders(params).subscribe((data: any) => {
 			this.pages = [];
-			for(var i = 1; i <= data.last_page; i++)
-			{
+			for (var i = 1; i <= data.last_page; i++) {
 				this.pages.push(i);
 			}
 			this.busy = false;

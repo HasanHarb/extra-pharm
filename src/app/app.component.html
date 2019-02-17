@@ -1,325 +1,327 @@
 <div id="preloader">
-  <div id="preloader-status">
-      <div class="spinner">
-          <div class="rect1"></div>
-          <div class="rect2"></div>
-          <div class="rect3"></div>
-          <div class="rect4"></div>
-          <div class="rect5"></div>
-      </div>
-      <div id="preloader-title">{{ 'LOADING' | translate }}</div>
-  </div>
+	<div id="preloader-status">
+		<div class="spinner">
+			<div class="rect1"></div>
+			<div class="rect2"></div>
+			<div class="rect3"></div>
+			<div class="rect4"></div>
+			<div class="rect5"></div>
+		</div>
+		<div id="preloader-title">{{ 'LOADING' | translate }}</div>
+	</div>
 </div>
 
 <div [ngBusy]="busy"></div>
 
 <div class="wrapper lang-{{lang}}">
-  <div class="modal fade popup-cart" id="popup-cart" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="container">
-              <div class="cart-items">
-                  <div class="cart-items-inner">
-                      <div class="media">
-                          <a class="pull-right" href="#">
-                              <img class="media-object item-image" src="assets/img/preview/shop/order-1s.jpg" alt="order">
-                          </a>
-                          <p class="pull-left item-price">$450.00</p>
-                          <div class="media-body">
-                              <h4 class="media-heading item-title">
-                                  <a href="#">1x Standard Product</a>
-                              </h4>
-                              <p class="item-desc">Lorem ipsum dolor</p>
-                          </div>
-                      </div>
-                      <div class="media">
-                          <p class="pull-left item-price">$450.00</p>
-                          <div class="media-body">
-                              <h4 class="media-heading item-title summary">Subtotal</h4>
-                          </div>
-                      </div>
-                      <div class="media">
-                          <div class="media-body">
-                              <div>
-                                  <a href="#" class="btn btn-theme btn-theme-dark" data-dismiss="modal">Close</a>
-                                  <a routerLink="cart" class="btn btn-theme btn-theme-transparent btn-call-checkout">Checkout</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="top-bar">
-      <div class="container">
-          <div class="top-bar-left">
-              <ul class="list-inline">
-                  <li class="icon-user" *ngIf="refreshLoggedIn()">
-                      <a routerLink="profile">
-                          <img src="assets/img/icon-1.png" alt="user icon" />
-                          <span>{{ 'WELCOME' | translate }} {{user.first_name}}</span>
-                      </a>
-                  </li>
+	<div class="modal fade popup-cart" id="popup-cart" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="container">
+				<div class="cart-items">
+					<div class="cart-items-inner">
+						<div class="media">
+							<a class="pull-right" href="#">
+								<img class="media-object item-image" src="assets/img/preview/shop/order-1s.jpg" alt="order">
+							</a>
+							<p class="pull-left item-price">$450.00</p>
+							<div class="media-body">
+								<h4 class="media-heading item-title">
+									<a href="#">1x Standard Product</a>
+								</h4>
+								<p class="item-desc">Lorem ipsum dolor</p>
+							</div>
+						</div>
+						<div class="media">
+							<p class="pull-left item-price">$450.00</p>
+							<div class="media-body">
+								<h4 class="media-heading item-title summary">Subtotal</h4>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body">
+								<div>
+									<a href="#" class="btn btn-theme btn-theme-dark" data-dismiss="modal">Close</a>
+									<a routerLink="cart" class="btn btn-theme btn-theme-transparent btn-call-checkout">Checkout</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="top-bar">
+		<div class="container">
+			<div class="top-bar-left">
+				<ul class="list-inline">
+					<li class="icon-user" *ngIf="refreshLoggedIn()">
+						<a routerLink="profile">
+							<img src="assets/img/icon-1.png" alt="user icon" />
+							<span>{{ 'WELCOME' | translate }} {{user.first_name}}</span>
+						</a>
+					</li>
 
-                  <li class="icon-user" *ngIf="loggedIn">
-                          <a (click)="logout()">
-                              <img src="assets/img/icon-1.png" alt="user icon" />
-                              <span>{{ 'LOGOUT_TEXT' | translate }}</span>
-                          </a>
-                      </li>
+					<li class="icon-user" *ngIf="loggedIn">
+						<a (click)="logout()">
+							<img src="assets/img/icon-1.png" alt="user icon" />
+							<span>{{ 'LOGOUT_TEXT' | translate }}</span>
+						</a>
+					</li>
 
-                  <li class="icon-user" *ngIf="!loggedIn">
-                      <a routerLink="login">
-                          <img src="assets/img/icon-1.png" alt="user icon" />
-                          <span>{{ 'LOGIN_TEXT' | translate }}</span>
-                      </a>
-                  </li>
-                  <li class="icon-form" *ngIf="!loggedIn">
-                      <a routerLink="register">
-                          <img src="assets/img/icon-2.png" alt="register icon" />
-                          <span>{{ 'NOT_MEMBER'| translate }}
-                              <span class="black-link">{{ 'REGISTER' | translate }}</span>
-                          </span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="mailto:info@extra-pharm.com">
-                          <i class="fa fa-envelope"></i>
-                          <span> info@extra-pharm.com</span>
-                      </a>
-                  </li>
-              </ul>
-          </div>
-          <div class="top-bar-right">
-              <ul class="list-inline">
-                  <li class="hidden-xs">
-                      <a routerLink="about" title="{{ 'ABOUT'| translate }}">{{ 'ABOUT'| translate }}</a>
-                  </li>
-                  <li class="hidden-xs" *ngIf="loggedIn">
-                      <a routerLink="profile" title="{{ 'MY_PROFILE'| translate }}">{{ 'MY_PROFILE'| translate }}</a>
-                  </li>
-                  <li class="hidden-xs">
-                      <a routerLink="contact-us" title="{{ 'CONTACT' | translate }}">{{ 'CONTACT' | translate }}</a>
-                  </li>
-                  <li class="hidden-xs" *ngIf="loggedIn">
-                      <a routerLink="favorites" title="{{ 'FAVORITES' | translate }}">{{ 'FAVORITES' | translate }}</a>
-                  </li>
-                  <li class="dropdown flags langs">
-                      <a  class="dropdown-toggle" data-toggle="dropdown">{{ selectedLanguageName }}
-                          <i class="black-link-hover fa fa-angle-down"></i>
-                      </a>
-                      <ul role="menu" class="dropdown-menu">
-                          <li *ngFor="let lang of languages">
-                              <a  (click)="selectLang(lang)">{{ lang.name }}</a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </div>
-  <header class="header fixed">
-      <div class="header-wrapper">
-          <div class="container">
-              <div class="logo">
-                  <a href="/">
-                      <img src="assets/img/logo-ar.svg" alt="اكسترا فارم" />
-                  </a>
-              </div>
-              <div class="header-search">
-                  <form (ngSubmit)="submitSearch()">
-                      <input class="form-control" [(ngModel)]="searchKey" name="searchKey"  type="text" placeholder="{{ 'SEARCH' | translate }}" />
-                      <button type="submit">
-                          <i class="fa fa-search"></i>
-                      </button>
-                  </form>
-              </div>
-              <div class="header-cart" *ngIf="refreshLoggedIn()">
-                  <div class="cart-wrapper">
-                      <a routerLink="favorites" class="btn btn-theme-transparent hidden-xs hidden-sm" title="{{ 'FAVORITES' | translate }}">
-                          <i class="fa fa-heart"></i>
-                      </a>
-                      <a routerLink="cart" class="btn btn-theme-transparent" title="{{ 'CART' | translate }}">
-                          <i class="fa fa-shopping-cart"><span [ngClass]="{'cartCount': getCartLength() != 0}" class="cartCount">{{ getCartLength() || null }}</span></i>
-                      </a>
-                      <a class="menu-toggle btn btn-theme-transparent">
-                          <i class="fa fa-bars" ></i>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="navigation-wrapper">
-          <div class="container">
-              <nav class="navigation nav-fixed-open closed clearfix" >
-                  <a  class="menu-toggle-close btn">
-                      <i class="fa fa-times"></i>
-                  </a>
-                  <ul class="nav sf-menu">
-                      <li >
-                          <a routerLink="">{{ 'HOME' | translate }}</a>
-                      </li>
-                      <li *ngFor="let cat of mainCategories">
-                          <a routerLink="products/{{ cat.slug }}">
-                              {{ cat | localize:'name' }}
-                          </a>
-                      </li>                       
-                      <li class="sale">
-                          <a routerLink="sales">{{ 'SALES' | translate}}</a>
-                      </li>
-                       <li>
-                          <a routerLink="top-ten">Top Ten</a>
-                      </li>
-                      <li>
-                          <a routerLink="contact-us">{{ 'CONTACT'| translate }}</a>
-                      </li>
-                  </ul>
-              </nav>
-          </div>
-      </div>
-  </header>
-  <div class="content-area">
-        <router-outlet></router-outlet>
-  </div>
-  <footer class="footer">
-      <div class="footer-widgets">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-3">
-                      <div class="widget">
-                          <h4 class="widget-title">{{ 'ABOUT' | translate }}</h4>                            
-                          <!-- <p [innerHTML]="content.excerpt"></p> -->
-                          <ul class="social-icons" *ngIf="settings">
-                              <li>
-                                  <a href="{{ settings.facebook_url.value }}" class="facebook">
-                                      <i class="fa fa-facebook"></i>
-                                  </a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-md-3">
-                      <div class="widget">
-                          <h4 class="widget-title">{{ 'SUB_TO_NEWSLETTER'| translate }}</h4>
-                          <p>{{'ENTER_EMAIL_TO_SUB'| translate}}</p>
-                          <form action="#" [formGroup]="subscribeForm" (ngSubmit)="postSubscriber()">
-                              <div class="form-group">
-                                  <input  formControlName="email" [(ngModel)]="newsletterEmail" required="required" class="form-control" type="text" placeholder="الايميل" />
-                              </div>
-                              <div class="row" *ngIf="subscribeError">
-                                  <div class="col-md-12 col-lg-12 text-left-lg">
-                                      <span style="color: red">
-                                          {{subscribeErrorText | translate}}
-                                      </span>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <button type="submit" class="btn btn-theme btn-theme-transparent">{{ 'SUBSCRIBE' | translate }}</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-                  <div class="col-md-3">
-                      <div class="widget widget-categories">
-                          <h4 class="widget-title">معلومات</h4>
-                          <ul>
-                              <li>
-                                  <a routerLink="/about">{{ 'ABOUT' | translate }}</a>
-                              </li>
-                              <li>
-                                  <a routerLink="help">{{ 'HELP' | translate }}</a>
-                              </li>
-                              <li>
-                                  <a routerLink="contact-us">{{ 'CONTACT' | translate }}</a>
-                              </li>
-                              <li>
-                                  <a routerLink="terms">{{ 'TERMS' | translate }}</a>
-                              </li>
-                              <li>
-                                  <a routerLink="privacy">{{ 'PRIVACY_POLICY' | translate }}</a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-md-3 hide">
-                      <div class="widget widget-tag-cloud">
-                          <h4 class="widget-title">Item Tags</h4>
-                          <ul>
-                              <li>
-                                  <a href="#">Fashion</a>
-                              </li>
-                              <li>
-                                  <a href="#">Jeans</a>
-                              </li>
-                              <li>
-                                  <a href="#">Top Sellers</a>
-                              </li>
-                              <li>
-                                  <a href="#">E commerce</a>
-                              </li>
-                              <li>
-                                  <a href="#">Hot Deals</a>
-                              </li>
-                              <li>
-                                  <a href="#">Supplier</a>
-                              </li>
-                              <li>
-                                  <a href="#">Shop</a>
-                              </li>
-                              <li>
-                                  <a href="#">Theme</a>
-                              </li>
-                              <li>
-                                  <a href="#">Website</a>
-                              </li>
-                              <li>
-                                  <a href="#">Isamercan</a>
-                              </li>
-                              <li>
-                                  <a href="#">Themeforest</a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
+					<li class="icon-user" *ngIf="!loggedIn">
+						<a routerLink="login">
+							<img src="assets/img/icon-1.png" alt="user icon" />
+							<span>{{ 'LOGIN_TEXT' | translate }}</span>
+						</a>
+					</li>
+					<li class="icon-form" *ngIf="!loggedIn">
+						<a routerLink="register">
+							<img src="assets/img/icon-2.png" alt="register icon" />
+							<span>{{ 'NOT_MEMBER'| translate }}
+								<span class="black-link">{{ 'REGISTER' | translate }}</span>
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="mailto:info@extra-pharm.com">
+							<i class="fa fa-envelope"></i>
+							<span> info@extra-pharm.com</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="top-bar-right">
+				<ul class="list-inline">
+					<li class="hidden-xs">
+						<a routerLink="about" title="{{ 'ABOUT'| translate }}">{{ 'ABOUT'| translate }}</a>
+					</li>
+					<li class="hidden-xs" *ngIf="loggedIn">
+						<a routerLink="profile" title="{{ 'MY_PROFILE'| translate }}">{{ 'MY_PROFILE'| translate }}</a>
+					</li>
+					<li class="hidden-xs">
+						<a routerLink="contact-us" title="{{ 'CONTACT' | translate }}">{{ 'CONTACT' | translate }}</a>
+					</li>
+					<li class="hidden-xs" *ngIf="loggedIn">
+						<a routerLink="favorites" title="{{ 'FAVORITES' | translate }}">{{ 'FAVORITES' | translate }}</a>
+					</li>
+					<li class="dropdown flags langs hide">
+						<a class="dropdown-toggle" data-toggle="dropdown">{{ selectedLanguageName }}
+							<i class="black-link-hover fa fa-angle-down"></i>
+						</a>
+						<ul role="menu" class="dropdown-menu">
+							<li *ngFor="let lang of languages">
+								<a (click)="selectLang(lang)">{{ lang.name }}</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<header class="header fixed">
+		<div class="header-wrapper">
+			<div class="container">
+				<div class="logo">
+					<a href="/">
+						<img src="assets/img/logo-ar.svg" alt="اكسترا فارم" />
+					</a>
+				</div>
+				<div class="header-search">
+					<form (ngSubmit)="submitSearch()">
+						<input class="form-control" [(ngModel)]="searchKey" name="searchKey" type="text" placeholder="{{ 'SEARCH' | translate }}" />
+						<button type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</form>
+				</div>
+				<div class="header-cart">
+					<div class="cart-wrapper">
+						<a routerLink="favorites" class="btn btn-theme-transparent hidden-xs hidden-sm" title="{{ 'FAVORITES' | translate }}">
+							<i class="fa fa-heart"></i>
+						</a>
+						<a routerLink="cart" class="btn btn-theme-transparent" title="{{ 'CART' | translate }}">
+							<i class="fa fa-shopping-cart"><span [ngClass]="{'cartCount': getCartLength() != 0}" class="cartCount">{{
+									getCartLength() || null }}</span></i>
+						</a>
+						<a class="menu-toggle btn btn-theme-transparent">
+							<i class="fa fa-bars"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="navigation-wrapper">
+			<div class="container">
+				<nav class="navigation nav-fixed-open closed clearfix">
+					<a class="menu-toggle-close btn">
+						<i class="fa fa-times"></i>
+					</a>
+					<ul class="nav sf-menu">
+						<li>
+							<a routerLink="">{{ 'HOME' | translate }}</a>
+						</li>
+						<li *ngFor="let cat of mainCategories">
+							<a routerLink="products/{{ cat.slug }}">
+								{{ cat | localize:'name' }}
+							</a>
+						</li>
+						<li class="sale">
+							<a routerLink="sales">{{ 'SALES' | translate}}</a>
+						</li>
+						<li>
+							<a routerLink="top-ten">Top Ten</a>
+						</li>
+						<li>
+							<a routerLink="contact-us">{{ 'CONTACT'| translate }}</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<div class="content-area">
+		<router-outlet></router-outlet>
+	</div>
+	<footer class="footer">
+		<div class="footer-widgets">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="widget">
+							<h4 class="widget-title">{{ 'ABOUT' | translate }}</h4>
+							<!-- <p [innerHTML]="content.excerpt"></p> -->
+							<ul class="social-icons" *ngIf="settings">
+								<li>
+									<a href="{{ settings.facebook_url.value }}" class="facebook">
+										<i class="fa fa-facebook"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="widget">
+							<h4 class="widget-title">{{ 'SUB_TO_NEWSLETTER'| translate }}</h4>
+							<p>{{'ENTER_EMAIL_TO_SUB'| translate}}</p>
+							<form action="#" [formGroup]="subscribeForm" (ngSubmit)="postSubscriber()">
+								<div class="form-group">
+									<input formControlName="email" [(ngModel)]="newsletterEmail" required="required" class="form-control" type="text"
+									 placeholder="الايميل" />
+								</div>
+								<div class="row" *ngIf="subscribeError">
+									<div class="col-md-12 col-lg-12 text-left-lg">
+										<span style="color: red">
+											{{subscribeErrorText | translate}}
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-theme btn-theme-transparent">{{ 'SUBSCRIBE' | translate }}</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="widget widget-categories">
+							<h4 class="widget-title">معلومات</h4>
+							<ul>
+								<li>
+									<a routerLink="/about">{{ 'ABOUT' | translate }}</a>
+								</li>
+								<li>
+									<a routerLink="help">{{ 'HELP' | translate }}</a>
+								</li>
+								<li>
+									<a routerLink="contact-us">{{ 'CONTACT' | translate }}</a>
+								</li>
+								<li>
+									<a routerLink="terms">{{ 'TERMS' | translate }}</a>
+								</li>
+								<li>
+									<a routerLink="privacy">{{ 'PRIVACY_POLICY' | translate }}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3 hide">
+						<div class="widget widget-tag-cloud">
+							<h4 class="widget-title">Item Tags</h4>
+							<ul>
+								<li>
+									<a href="#">Fashion</a>
+								</li>
+								<li>
+									<a href="#">Jeans</a>
+								</li>
+								<li>
+									<a href="#">Top Sellers</a>
+								</li>
+								<li>
+									<a href="#">E commerce</a>
+								</li>
+								<li>
+									<a href="#">Hot Deals</a>
+								</li>
+								<li>
+									<a href="#">Supplier</a>
+								</li>
+								<li>
+									<a href="#">Shop</a>
+								</li>
+								<li>
+									<a href="#">Theme</a>
+								</li>
+								<li>
+									<a href="#">Website</a>
+								</li>
+								<li>
+									<a href="#">Isamercan</a>
+								</li>
+								<li>
+									<a href="#">Themeforest</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 
-              </div>
-          </div>
-      </div>
-      <div class="footer-meta">
-          <div class="container">
-              <div class="row">
-                  <div class="col-sm-6">
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="payments">
-                          <ul>
-                              <li>
-                                  <img src="assets/img/preview/payments/visa.jpg" alt="visa" />
-                              </li>
-                              <li>
-                                  <img src="assets/img/preview/payments/mastercard.jpg" alt="mastercard" />
-                              </li>
-                              <li>
-                                  <img src="assets/img/preview/payments/paypal.jpg" alt="paypal" />
-                              </li>
-                              <li>
-                                  <img src="assets/img/preview/payments/american-express.jpg" alt="american-express" />
-                              </li>
-                              <li>
-                                  <img src="assets/img/preview/payments/visa-electron.jpg" alt="visa-electron" />
-                              </li>
-                              <li>
-                                  <img src="assets/img/preview/payments/maestro.jpg" alt="maestro" />
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-meta">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+					</div>
+					<div class="col-sm-6">
+						<div class="payments">
+							<ul>
+								<li>
+									<img src="assets/img/preview/payments/visa.jpg" alt="visa" />
+								</li>
+								<li>
+									<img src="assets/img/preview/payments/mastercard.jpg" alt="mastercard" />
+								</li>
+								<li>
+									<img src="assets/img/preview/payments/paypal.jpg" alt="paypal" />
+								</li>
+								<li>
+									<img src="assets/img/preview/payments/american-express.jpg" alt="american-express" />
+								</li>
+								<li>
+									<img src="assets/img/preview/payments/visa-electron.jpg" alt="visa-electron" />
+								</li>
+								<li>
+									<img src="assets/img/preview/payments/maestro.jpg" alt="maestro" />
+								</li>
+							</ul>
+						</div>
+					</div>
 
-              </div>
-          </div>
-      </div>
-  </footer>
-  <div id="to-top" class="to-top">
-      <i class="fa fa-angle-up"></i>
-  </div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div id="to-top" class="to-top">
+		<i class="fa fa-angle-up"></i>
+	</div>
 </div>

@@ -1,35 +1,27 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Repo } from '../../services/repo.service';
-import { ActivatedRoute } from '@angular/router';
 import { ProductData, PaginateData } from "../../models/models";
-import { ToastrService } from 'ngx-toastr';
 import { Config } from "../../config";
-import {Http} from '@angular/http';
 
 @Component({
-  selector: 'app-sales',
-  templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.css']
+	selector: 'app-sales',
+	templateUrl: './sales.component.html',
+	styleUrls: ['./sales.component.css']
 })
 export class SalesComponent implements OnInit {
-	busy:  boolean;
+	busy: boolean;
 	featuredSales: any[];
 	sales: ProductData[] = [];
 	imagesUrlBase = Config.StorageUrl;
 	paginate: PaginateData = <PaginateData>{};
 
-	constructor(
-		public repo: Repo,
-		private http: Http,
-		private toastr: ToastrService
-	) {
+	constructor(public repo: Repo) {
 		this.paginate.current_page = 0;
-		
 	}
 
-  ngOnInit() {
-    this.getProducts();
-}
+	ngOnInit() {
+		this.getProducts();
+	}
 
 	getProducts() {
 		this.busy = true;
@@ -44,11 +36,11 @@ export class SalesComponent implements OnInit {
 		}, err => this.busy = false);
 	}
 
-	doInfinite(infiniteScroll) {		
+	doInfinite(infiniteScroll) {
 		setTimeout(() => {
 			if (this.paginate.current_page < this.paginate.last_page) {
 				this.getProducts();
-			}			
+			}
 			infiniteScroll.complete();
 		}, 500);
 	}

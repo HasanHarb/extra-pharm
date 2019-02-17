@@ -1,13 +1,8 @@
 import { Component, OnChanges, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { Repo } from '../../services/repo.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductData, PaginateData } from "../../models/models";
-import { ToastrService } from 'ngx-toastr';
-import { Config } from "../../config";
-import { Http } from '@angular/http';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
-import { timeout } from 'rxjs/operator/timeout';
-
+import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-products',
@@ -17,8 +12,7 @@ import { timeout } from 'rxjs/operator/timeout';
 })
 export class ProductsComponent implements OnInit, OnChanges {
 	//busy: Promise<any>;
-
-	range=[0,1000];
+	range = [0, 1000];
 	//Search input
 	start: number = 1;
 	end: number = 12;
@@ -50,9 +44,8 @@ export class ProductsComponent implements OnInit, OnChanges {
 	searchKey: string;
 	// used to set expanded area in filters menu
 	expandedArea: any;
-	pageNumber: number ;
+	pageNumber: number;
 	// used in filters menu to enable user filter by company/brand
-
 	groups: any = [];
 	companies: any;
 	firtTen: any;
@@ -64,29 +57,18 @@ export class ProductsComponent implements OnInit, OnChanges {
 		gender: 'ALL',
 		price: 'lowest',
 	};
-
 	minPrice: number = 1;
 	maxPrice: number = 1000;
-
 	rangeMin: number = 1;
 	rangeMax: number = 1000;
-
 	busy: boolean = false;
-
 	sliders = [];
 	host = "";
-
 	limitAttrs: number = 15;
 
-	constructor(
-		public repo: Repo,
-		private route: ActivatedRoute,
-		private http: Http,
-		private router: Router,
-		private toastr: ToastrService
-	) {
+	constructor(public repo: Repo, private route: ActivatedRoute) {
 		this.host = window.location.host;
-	 }
+	}
 
 	ngOnInit() {
 		let paged = this.route.snapshot.queryParams["page"] || 1;
@@ -104,18 +86,17 @@ export class ProductsComponent implements OnInit, OnChanges {
 		this.limitAttrs = this.limitAttrs == 15 ? length : 15
 	}
 
-	getSliders()
-	{
+	getSliders() {
 		this.repo.getSliders({ place: 'home', media: 'desktop' }).subscribe(data => {
 			this.sliders = data.data;
 		});
 	}
 
-	ngOnChanges(changes: SimpleChanges){
+	ngOnChanges(changes: SimpleChanges) {
 
 	}
 
-	rangeChanged(event:any){
+	rangeChanged(event: any) {
 		this.minPrice = this.range[0];
 		this.maxPrice = this.range[1];
 		this.getProducts();
@@ -123,7 +104,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 
 	getProducts(page: number = 1, scrollTop: boolean = true) {
 
-		if(scrollTop) window.scrollTo(0, 0);
+		if (scrollTop) window.scrollTo(0, 0);
 
 		this.busy = true;
 		this.products = [];
@@ -136,7 +117,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 			attrs: {}
 		}
 
-		if(this.groups.length) {
+		if (this.groups.length) {
 			this.groups.forEach(element => {
 				searchQuery.attrs[element.slug] = this.selectedFilters[element.slug] == 'ALL' ? this.selectedFilters[element.slug] : this.selectedFilters[element.slug];
 			});
@@ -144,22 +125,21 @@ export class ProductsComponent implements OnInit, OnChanges {
 
 		this.repo.getProducts(searchQuery).subscribe((data: any) => {
 
-      setTimeout(() => {
-        this.busy = false
-      }, 1000);
+			setTimeout(() => {
+				this.busy = false
+			}, 1000);
 
 			this.pageNumber = page;
 			/*if(data.data.length < 1){
 				this.products = data.data;
 			}*/
-			if(page == 1)
-			{
+			if (page == 1) {
 				this.pages = [];
 			}
-			if(this.pages.length < 9) {
+			if (this.pages.length < 9) {
 				this.pages = new Array(data.last_page);
 				this.lastPage = Number(data.last_page);
-				if(data.last_page > 9) {
+				if (data.last_page > 9) {
 					this.pages.splice(this.start, this.end);
 				}
 			}
@@ -178,7 +158,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 		}
 	}
 
-	searchProducts(clear: boolean = false){
+	searchProducts(clear: boolean = false) {
 		let searchQuery = {
 			category_slug: this.categorySlug,
 			search_Key: this.search_key,
@@ -217,7 +197,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 	 * Fetch attributes from APi to use in filter menu
 	 */
 	getAttributes() {
-		this.repo.getAttributes(this.categorySlug).subscribe((attrs:any) => {
+		this.repo.getAttributes(this.categorySlug).subscribe((attrs: any) => {
 			this.groups = attrs
 			attrs.forEach(element => {
 				this.selectedFilters[element.slug] = 'ALL';
@@ -248,11 +228,21 @@ export class ProductsComponent implements OnInit, OnChanges {
 		});
 	}
 
-	expand(area:any, keep:boolean){
-		if(keep){
+	expand(area: any, keep: boolean) {
+		if (keep) {
 			this.expandedArea = area;
 		} else {
 			this.expandedArea = this.expandedArea == area ? null : area;
+		}
+	}
+
+	sort(criteria) {
+		if (criteria == 'alpha') {
+			this.products = _.orderBy(this.products, [p => p.title], ['asc']);
+		} else if (criteria == 'priceAsc') {
+			this.products = _.orderBy(this.products, [p => p.regular_price], ['asc']);
+		} else if (criteria == 'priceDesc') {
+			this.products = _.orderBy(this.products, [p => p.regular_price], ['desc']);
 		}
 	}
 

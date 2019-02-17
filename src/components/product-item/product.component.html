@@ -1,5 +1,5 @@
-<div class="pro-row-large {{ col }}" *ngIf="template == 'large'">
-    <div class="thumbnail no-border no-padding">
+<div class="product-item-holder pro-row-large {{ col }}" *ngIf="template == 'large'">
+    <div class="thumbnail">
         <div class="media">
             <div class="how-much-sale" *ngIf="product.sale > 0">
                 <span class="the-text-sale">{{ product.sale }}% {{"SALE"| translate}}</span>
@@ -18,12 +18,12 @@
                 <a  title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}">
                     {{ (product | localize:'title') || product.title }}
                 </a>
-            </h4>  
+            </h4>
             <h4 class="caption-title brand-name">
                 <span *ngIf="product.attributes.Company">
                     {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
                 </span>
-            </h4>            
+            </h4>
             <div class="price">
                 <ins>
                     <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
@@ -36,10 +36,10 @@
                 </a>
                 <a *ngIf="!cartPage && product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left" [ngClass]="{'in-cart' : inCart(product)}"  (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}
-                </a> 
+                </a>
                 <a *ngIf="!cartPage && !product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left"  (click)="specialOrder()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     {{ 'SPECIAL_ORDER' | translate }}
-                </a>                
+                </a>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
 
 <div class="pro-row-small thumbnail no-border no-padding" *ngIf="template == 'small'">
     <div class="media">
-        <a class="media-link media-small" title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">            
+        <a class="media-link media-small" title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
             <span class="icon-view">
                 <strong>
                     <i class="fa fa-eye"></i>
@@ -65,7 +65,7 @@
             <span *ngIf="product.attributes.Company">
                 {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
             </span>
-        </h4> 
+        </h4>
         <div class="price">
             <ins>
                 <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
@@ -76,7 +76,7 @@
             <a class="btn btn-theme btn-theme-transparent" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
                 <i class="fa fa-heart"></i>
             </a>
-            <a class="btn btn-theme btn-theme-transparent" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()">{{ 'ADD_TO_CART' | translate }}</a>            
+            <a class="btn btn-theme btn-theme-transparent" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()">{{ 'ADD_TO_CART' | translate }}</a>
             <a class="btn btn-theme btn-theme-transparent" href="#">
                 <i class="fa fa-exchange"></i>
             </a>
@@ -85,7 +85,7 @@
 </div>
 
 <div class="pro-row-horizontal media horizontal-item" *ngIf="template == 'horizontal'">
-    <a class="pull-right media-link media-image media-hor" title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">        
+    <a class="pull-right media-link media-image media-hor" title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
         <i class="fa fa-plus"></i>
     </a>
     <div class="media-body">
@@ -96,7 +96,7 @@
             <span *ngIf="product.attributes.Company">
                 {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
             </span>
-        </h4> 
+        </h4>
         <div class="price">
             <ins>
                 <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>

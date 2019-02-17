@@ -32,13 +32,13 @@ export class WishlistComponent implements OnInit {
 	}
 
 	removedFav() {
-		this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("SUCCEDD_REMOVED_FAV"));	
+		this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("SUCCEDD_REMOVED_FAV"));
 	}
 
 	addedCart() {
-		if(this.inCart(this.product) == true) {
+		if (this.inCart(this.product) == true) {
 			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("IN_CART"));
-		} 
+		}
 		else {
 			this.toastr.success(this.globals.translatefn("DONE"), this.globals.translatefn("OUT_CART"));
 		}
@@ -48,21 +48,21 @@ export class WishlistComponent implements OnInit {
 		this.fav.toggle(product);
 		this.removedFav();
 	}
-		inCart(product) {
-			var inCart = this.cartItem ? true : this.cart.inCart(product);
-			return inCart;
-		}
-		
-	addToCart(product) {		
+	inCart(product) {
+		var inCart = this.cartItem ? true : this.cart.inCart(product);
+		return inCart;
+	}
+
+	addToCart(product) {
 		var cartItem = this.prepareCartItem(product);
 		this.cart.addToCart(cartItem);
 		this.addedCart();
-				
+
 	}
 	/**
 	 * removeFromCart
 	 * Remove product from cart
-	 * @param product 
+	 * @param product
 	 */
 	removeFromCart(product) {
 		this.cart.removeFromCart(product);
@@ -72,7 +72,7 @@ export class WishlistComponent implements OnInit {
 	/**
 	 * prepareCartItem
 	 * Prepare product in order to add it to cart
-	 * @param product 
+	 * @param product
 	 */
 	prepareCartItem(product: ProductData) {
 		let cartItem = <CartItemData>{
