@@ -82,11 +82,11 @@
                     </form>
 
                     <div class="product-body">
-                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="product.body.length <= 100"></div>
-                      <div class="product-text" [innerHTML]="truncateHTML(product.body)" *ngIf="truncating && product.body.length > 100"></div>
-                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="!truncating && product.body.length > 100"></div>
-                      <button class="show-more-btn show-more-text" *ngIf="truncating && product.body.length > 100" (click)="truncating = false">{{ 'SHOW_MORE_TEXT' | translate }}</button>
-                      <button class="show-more-btn show-lestt-text" *ngIf="!truncating && product.body.length > 100" (click)="truncating = true">{{ 'SHOW_LESS_TEXT' | translate }}</button>
+                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="product.body.length <= bodyLength"></div>
+                      <div class="product-text" [innerHTML]="truncateHTML(product.body)" *ngIf="truncating && product.body.length > bodyLength"></div>
+                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="!truncating && product.body.length > bodyLength"></div>
+                      <button class="show-more-btn show-more-text" *ngIf="truncating && product.body.length > bodyLength" (click)="truncating = false">{{ 'SHOW_MORE_TEXT' | translate }}</button>
+                      <button class="show-more-btn show-lestt-text" *ngIf="!truncating && product.body.length > bodyLength" (click)="truncating = true">{{ 'SHOW_LESS_TEXT' | translate }}</button>
                     </div>
 
 

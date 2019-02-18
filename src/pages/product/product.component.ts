@@ -46,8 +46,8 @@ export class ProductComponent implements OnInit {
 	// product price after sale
 	priceAfterSale: number = 0;
 	priceAsString: string[];
-  showBrandInTitle: boolean = false;
-  brand: string;
+  	showBrandInTitle: boolean = false;
+  	brand: string;
 	// attrs indicator
 	showAttrs: boolean = false;
 	// busy indicator
@@ -58,9 +58,9 @@ export class ProductComponent implements OnInit {
 	selectedTypeId = 0;
 	productBusy: boolean = false;
 	color = '';
-
+	bodyLength: number = 300;
 	host = "";
-  truncating = true;
+  	truncating = true;
 	constructor(
 		private fav: Favorites,
 		private cart: Cart,
