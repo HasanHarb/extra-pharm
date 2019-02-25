@@ -162,8 +162,8 @@ export class ProductComponent implements OnInit {
 		this.repo.getProduct(this.productId).subscribe((data: any) => {
 			this.productBusy = false;
 
-      this.product = data.product;
-      this.brand = data.attrs['الماركة'].name;
+			this.product = data.product;
+			this.brand = data.attrs['الماركة'] ? data.attrs['الماركة'].name : null;
 			// set image
 			this.product.image = this.imagesUrlBase + this.product.image;
 			this.productImage = this.product.image;

@@ -31,7 +31,7 @@
 
 .how-much-sale {
     position: absolute;
-    left: 0;
+    right: 0;
     z-index: 10;
     padding: 5px 10px;
     background-color: #EC0231;
@@ -82,6 +82,37 @@
     top: -7px;
 }
 
-.product-item-holder {
+.buttons {
+    direction: ltr;
+    text-align: left;
+    background: #498dcb;
+    float: left;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
 
+.btn-heart {
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 0;
+    background: #EC0231;
+}
+
+.btn-cart {
+    border-bottom-right-radius: 15px;
+    border: 0;
+    color: #fff;
+}
+
+.btn-cart .fa{
+    margin-right: 7px !important;
+    margin-left: 0 !important;
+}
+
+.btn-heart img{
+    width: 22px;
+}
+
+.price div{
+    height: 25px;
 }

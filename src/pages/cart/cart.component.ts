@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { Cart } from '../../services/cart.service';
 import { Config } from '../../config';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
 	orderFlag: boolean = true;
 
 	imagesUrlBase = Config.StorageUrl;
-	discount = 0;
+	discount: any = 0;
 	couponItem: any = <any>{};
 	orderItem: any = <any>{};
 	activeItemsInCart: any = [];
@@ -34,6 +35,7 @@ export class CartComponent implements OnInit {
 		private repo: Repo,
 		private router: Router,
 		private formBuilder: FormBuilder,
+		private decimalPipe: DecimalPipe,
 		private toastr: ToastrService) {
 
 		this.host = window.location.host;
@@ -143,12 +145,17 @@ export class CartComponent implements OnInit {
 	}
 
 	calculateDiscount() {
-		if (this.couponItem.type == 'FIXED')
+		if (this.couponItem.type == 'FIXED') {
 			this.discount = this.couponItem.value;
-		else if (this.couponItem.type == 'PERCENT')
-			this.discount = (this.getTotal() * this.couponItem.value) / 100;
-		else
+		}
+		else if (this.couponItem.type == 'PERCENT') {
+			let total: any = this.getTotal(true);
+			this.discount = (total * this.couponItem.value) / 100;
+		}
+		else{
 			this.discount = 0;
+		}
+		// this.discount = this.decimalPipe.transform(this.discount, '1.2-2');
 	}
 
 	cancelCoupon() {
@@ -174,7 +181,11 @@ export class CartComponent implements OnInit {
 	}
 
 	resolvePrices(item) {
-		return item.type.price;
+		let base = item.type && item.type.price ? item.type.price : item.product.regular_price;
+		let price: any = base - (base * (item.product.sale / 100));
+		price = this.decimalPipe.transform(price, '1.2-2');
+		return price;
+		// return item.type && item.type.length ? item.type.price : (item.product.sale_price ? item.product.sale_price : item.product.regular_price);
 	}
 
 	remove(product, source = 'in') {
@@ -194,8 +205,8 @@ export class CartComponent implements OnInit {
 		}
 	}
 
-	getTotal() {
-		return this.cart.calculateTotal(this.activeItemsInCart);
+	getTotal(isNumber = false) {
+		return isNumber ? this.cart.calculateTotal(this.activeItemsInCart) : this.decimalPipe.transform(this.cart.calculateTotal(this.activeItemsInCart), '1.2-2');
 	}
 
 	isPerfumeAndHasAttributes(product) {

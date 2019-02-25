@@ -150,7 +150,7 @@
                             <tfoot>
                                 <tr>
                                     <td>{{ 'TOTAL' | translate }}:</td>
-                                    <td>₪{{ getTotal() - discount }}</td>
+                                    <td>₪{{ getTotal(true) - discount | number:'1.2-2' }}</td>
                                 </tr>
                             </tfoot>
                         </table>

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CommonModule } from '@angular/common';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
+import { DecimalPipe } from '@angular/common';
 // import { RangeSliderModule } from 'ngx-rangeslider-component';
 
 // pages
@@ -144,6 +145,7 @@ export function createTranslateLoader(http: HttpClient) {
 		Repo,
 		Cart,
 		Favorites,
+		DecimalPipe
 	],
 	bootstrap: [AppComponent]
 })

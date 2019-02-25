@@ -4073,7 +4073,6 @@ input[type=checkbox] {
     margin-left: 10px;
 }
 .thumbnail .buttons .in-fav {
-    background-color: #498dcb;
     color: #ffffff;
 }
 .thumbnail .buttons .btn-compare {
@@ -4513,7 +4512,6 @@ input[type=checkbox] {
     color: #232323;
 }
 .product-single .buttons .in-fav {
-    background-color: #232323;
     color: #ffffff;
 }
 .product-single .buttons .btn-wish-list:hover,
@@ -7265,4 +7263,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .product-single .product-text p {
   margin-bottom: 10px !important;
+}
+
+.btn.btn-theme-transparent .fa.fa-shopping-cart span {
+    margin-left: 7px;
 }

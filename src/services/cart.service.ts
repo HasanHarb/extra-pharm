@@ -84,7 +84,7 @@ export class Cart {
 
         var total = 0;
         cart.forEach(function (item) {
-            var base = item.type && item.type.price > 0 ? item.type.price : item.product.regular_price;
+            var base = item.type && item.type.price ? item.type.price : item.product.regular_price;
             var price = base - (base * (item.product.sale / 100));
             total = total + price * item.quantity;
 

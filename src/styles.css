@@ -20,6 +20,11 @@
 }
 
 @font-face {
+    font-family: 'Bahij Semi Bold';
+    src: url('assets/fonts/bahij/bahij-semi-bold.ttf');
+}
+
+@font-face {
     font-family: 'Bahij Extra Bold';
     src: url('assets/fonts/bahij/bahij-extra-bold.ttf');
 }
@@ -55,5 +60,15 @@ body {
     color: theme-color-level('success', 6);*/
     background-color: #498dcb !important;
     border: 1px solid #498dcb !important;
-  }
+}
+
+ins {
+    font-family: 'Bahij Bold' !important;
+    color: #EC0231;
+    text-decoration: none;
+}
+
+del {
+    font-family: 'Bahij Semi Bold' !important;
+}
 

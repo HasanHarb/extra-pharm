@@ -28,6 +28,7 @@ spinner {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    top: 0;
 }
 
 .icons-list {
@@ -43,10 +44,6 @@ spinner {
     width: 100%;
 }
 
-.attrs-list li {
-
-}
-
 .show-more-btn {
   margin: 10px 0;
   font-size: 12px;
@@ -54,7 +51,41 @@ spinner {
 
 .brand {
   font-size: 15px;
+  color: #EC0231;
+  font-weight: bold;
 }
+
 .name {
   font-size: 20px;
+}
+
+.buttons {
+    background: #498dcb;
+    float: right;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.btn-heart {
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 0;
+    background: #EC0231;
+}
+
+.btn-cart-custom {
+    border-bottom-right-radius: 15px;
+    border: 0;
+    color: #fff;
+    background: #498dcb;
+    direction: ltr;
+}
+
+.btn-cart-custom .fa{
+    margin-right: 7px !important;
+    margin-left: 0 !important;
+}
+
+.btn-heart img{
+    width: 22px;
 }

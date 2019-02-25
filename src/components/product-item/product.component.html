@@ -25,19 +25,30 @@
                 </span>
             </h4>
             <div class="price">
-                <ins>
-                    <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
-                </ins>
-                <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+                <div>
+                    <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+                </div>
+                <div>
+                    <ins>
+                        <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
+                    </ins>
+                </div>
             </div>
             <div class="buttons">
-                <a class="btn btn-theme btn-theme-transparent"  [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
-                    <i class="fa fa-heart"></i>
+                <a class="btn btn-theme btn-theme-transparent btn-heart"  [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
+                    <span *ngIf="inFav()">
+                        <img src="assets/img/in_fav.svg" />
+                    </span>
+                    <span *ngIf="!inFav()">
+                        <img src="assets/img/out_fav.svg" />
+                    </span>
                 </a>
-                <a *ngIf="!cartPage && product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left" [ngClass]="{'in-cart' : inCart(product)}"  (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
-                    <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}
+                <a *ngIf="!cartPage && product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart" [ngClass]="{'in-cart' : inCart(product)}"  (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span *ngIf="inCart(product)">{{ 'REMOVE_FORM_CART' | translate }}</span>
+                    <span *ngIf="!inCart(product)">{{ 'ADD_TO_CART' | translate }}</span>
                 </a>
-                <a *ngIf="!cartPage && !product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left"  (click)="specialOrder()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                <a *ngIf="!cartPage && !product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart"  (click)="specialOrder()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     {{ 'SPECIAL_ORDER' | translate }}
                 </a>
             </div>
@@ -67,18 +78,28 @@
             </span>
         </h4>
         <div class="price">
-            <ins>
-                <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
-            </ins>
-            <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+            <div>
+                <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+            </div>
+            <div>
+                <ins>
+                    <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
+                </ins>
+            </div>
         </div>
         <div class="buttons">
-            <a class="btn btn-theme btn-theme-transparent" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
-                <i class="fa fa-heart"></i>
+            <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
+                <span *ngIf="inFav()">
+                    <img src="assets/img/in_fav.svg" />
+                </span>
+                <span *ngIf="!inFav()">
+                    <img src="assets/img/out_fav.svg" />
+                </span>
             </a>
-            <a class="btn btn-theme btn-theme-transparent" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()">{{ 'ADD_TO_CART' | translate }}</a>
-            <a class="btn btn-theme btn-theme-transparent" href="#">
-                <i class="fa fa-exchange"></i>
+            <a class="btn btn-theme btn-theme-transparent btn-cart" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()">
+                <i class="fa fa-shopping-cart"></i>
+                <span *ngIf="inCart(product)">{{ 'REMOVE_FORM_CART' | translate }}</span>
+                <span *ngIf="!inCart(product)">{{ 'ADD_TO_CART' | translate }}</span>
             </a>
         </div>
     </div>
@@ -98,10 +119,14 @@
             </span>
         </h4>
         <div class="price">
-            <ins>
-                <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>
-            </ins>
-            <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+            <div>
+                <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+            </div>
+            <div>
+                <ins>
+                    <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>
+                </ins>
+            </div>
         </div>
     </div>
 </div>

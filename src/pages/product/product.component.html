@@ -33,7 +33,7 @@
                     <h2 class="product-title">
                         <span class="brand">{{ brand }}</span><br>
                         <span class="name">{{ (product | localize:'title') || product.title }}</span>
-                        <span *ngIf="attrs.Company">- {{ (attrs.Company | localize:'name') || attrs.Company.name }}</span>
+                        <span *ngIf="attrs?.Company">- {{ (attrs.Company | localize:'name') || attrs.Company.name }}</span>
                     </h2>
 
                     <div class="product-availability" *ngIf="!product.in_stock" class="text-danger">
@@ -45,12 +45,16 @@
                     <hr class="page-divider small" />
 
                     <div class="product-price">
-                        <ins>
-                            <span class="new-price">
-                                <span class="int">₪{{ priceAfterSale }}</span>
-                            </span>
-                        </ins>
-                        <del *ngIf="priceAfterSale != price">{{ price }} ₪</del>
+                        <div>
+                            <del *ngIf="priceAfterSale != price">{{ price }} ₪</del>
+                        </div>
+                        <div>
+                            <ins>
+                                <span class="new-price">
+                                    <span class="int">₪{{ priceAfterSale }}</span>
+                                </span>
+                            </ins>
+                        </div>
                     </div>
 
                     <hr class="page-divider" />
@@ -68,7 +72,7 @@
                         <hr class="page-divider" />
                     </form>
 
-                    <form class="row variable" *ngIf="colors.length">
+                    <form class="row variable" *ngIf="colors?.length">
                         <div class="col-sm-6">
                             <div class="form-group selectpicker-wrapper">
                                 <label for="exampleSelect2">{{ 'COLOR' | translate }}</label>
@@ -109,16 +113,16 @@
                                     </li>
 
                                     <li *ngIf="product.weight">
-                                        <strong *ngIf="!attrs.hasOwnProperty('Weight Unit')">الوزن: </strong>
-                                        {{ product.weight }} <span *ngIf="attrs.hasOwnProperty('Weight Unit')">{{ attrs['Weight Unit'].name }}</span>
+                                        <strong *ngIf="!attrs?.hasOwnProperty('Weight Unit')">الوزن: </strong>
+                                        {{ product.weight }} <span *ngIf="attrs?.hasOwnProperty('Weight Unit')">{{ attrs['Weight Unit'].name }}</span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <div class="product-icons-list">
                                     <ul class="icons-list">
-                                        <li *ngIf="attrs.Icon"><img src="{{ imagesUrlBase + attrs.Icon.image }}"></li>
-                                        <li *ngIf="attrs.pharmacy_delivery"><img src="{{ imagesUrlBase + attrs.pharmacy_delivery.image }}"></li>
+                                        <li *ngIf="attrs?.Icon"><img src="{{ imagesUrlBase + attrs.Icon.image }}"></li>
+                                        <li *ngIf="attrs?.pharmacy_delivery"><img src="{{ imagesUrlBase + attrs.pharmacy_delivery.image }}"></li>
                                     </ul>
                                 </div>
                             </div>
@@ -128,7 +132,7 @@
                     <hr class="page-divider" />
 
                     <div class="buttons" *ngIf="product.id">
-                        <div class="quantity" *ngIf="product.in_stock">
+                        <!-- <div class="quantity" *ngIf="product.in_stock">
                             <button class="btn" (click)="changeQuantity('-')">
                                 <i class="fa fa-minus"></i>
                             </button>
@@ -136,17 +140,22 @@
                             <button class="btn" (click)="changeQuantity('+')">
                                 <i class="fa fa-plus"></i>
                             </button>
-                        </div>
-                        <button *ngIf="product.in_stock && !inCart(product)" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="addToCart()"
+                        </div> -->
+                        <button *ngIf="product.in_stock && !inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="addToCart()"
                             [ngClass]="{'in-cart' : inCart()}">
                             <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}</button>
-                        <button *ngIf="product.in_stock && inCart(product)" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="removeProductFromCart(product)"
+                        <button *ngIf="product.in_stock && inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="removeProductFromCart(product)"
                             [ngClass]="{'in-cart' : inCart()}">
                             <i class="fa fa-shopping-cart"></i>{{ 'REMOVE_FORM_CART' | translate }}</button>
-                        <button *ngIf="!product.in_stock" class="btn btn-theme btn-cart btn-icon-left" type="submit" (click)="specialBtnClicked()">
+                        <button *ngIf="!product.in_stock" class="btn btn-theme btn-cart-custom btn-icon-left" type="submit" (click)="specialBtnClicked()">
                             <i class="fa fa-shopping-cart"></i>{{ 'SPECIAL_ORDER' | translate }}</button>
-                        <button *ngIf="product.in_stock" class="btn btn-theme btn-wish-list" (click)="toggleFav()" [ngClass]="{'in-fav' : inFav()}">
-                            <i class="fa fa-heart"></i>
+                        <button *ngIf="product.in_stock" class="btn btn-theme btn-heart" (click)="toggleFav()" [ngClass]="{'in-fav' : inFav()}">
+                            <span *ngIf="inFav()">
+                                <img src="assets/img/in_fav.svg" />
+                            </span>
+                            <span *ngIf="!inFav()">
+                                <img src="assets/img/out_fav.svg" />
+                            </span>
                         </button>
                     </div>
                     <hr class="page-divider small" />
