@@ -169,6 +169,7 @@ export class ProductComponent implements OnInit {
 			this.productImage = this.product.image;
 			// get product attributes
 			this.attrs = data.attrs;
+
 			for (var key in this.attrs) {
 				if (this.attrs[key].listable) {
 					this.attrs[key].group = key;

@@ -98,7 +98,6 @@ export const appRoutes: Routes = [
 	imports: [
 		CommonModule,
 		RouterModule.forRoot(appRoutes),
-
 	],
 	exports: [RouterModule],
 	providers: [LoggedInUser, LoggedOutUser],

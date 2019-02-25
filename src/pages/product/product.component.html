@@ -33,7 +33,6 @@
                     <h2 class="product-title">
                         <span class="brand">{{ brand }}</span><br>
                         <span class="name">{{ (product | localize:'title') || product.title }}</span>
-                        <span *ngIf="attrs?.Company">- {{ (attrs.Company | localize:'name') || attrs.Company.name }}</span>
                     </h2>
 
                     <div class="product-availability" *ngIf="!product.in_stock" class="text-danger">

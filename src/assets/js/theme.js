@@ -31,7 +31,7 @@ jQuery.fn.slideFadeOut  = function(speed, easing, callback) {
     return this.animate({opacity: 'hide', height: 'hide'}, speed, easing, callback);
 };
 
-jQuery(document).ready(function () {    
+jQuery(document).ready(function () {
     // Prevent empty links
     // ---------------------------------------------------------------------------------------
     // Sticky header/menu
@@ -171,7 +171,7 @@ jQuery(document).ready(function () {
     // Shop categories widget slide in/out
     // ---------------------------------------------------------------------------------------
     $('.shop-categories .arrow').click(
-        function () {            
+        function () {
             $(this).parent().parent().find('ul.children').removeClass('active');
             $(this).parent().parent().find('.fa-angle-up').addClass('fa-angle-down').removeClass('fa-angle-up');
             if ($(this).parent().find('ul.children').is(":visible")) {
@@ -201,8 +201,8 @@ jQuery(document).ready(function () {
 
 jQuery(window).load(function () {
     // Preloader
-    $('#status').fadeOut();
-    $('#preloader').delay(200).fadeOut(200);
+    // $('#status').fadeOut();
+    $('#preloader').fadeOut(200);
     // Isotope
     if ($().isotope) {
         isotopeContainer.isotope({ // initialize isotope
@@ -229,11 +229,11 @@ jQuery(window).load(function () {
                 easing: "easeInOutExpo"
             });
         }
-    }    
-    
+    }
+
 });
 
-jQuery(window).resize(function () {    
+jQuery(window).resize(function () {
     // Refresh isotope
     if ($().isotope) {
         isotopeContainer.isotope('reLayout'); // layout/relayout on window resize
@@ -243,7 +243,7 @@ jQuery(window).resize(function () {
     }
 });
 
-jQuery(window).scroll(function () {    
+jQuery(window).scroll(function () {
     if ($().sticky) {
         $('.header.fixed').sticky('update');
     }
