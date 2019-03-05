@@ -20,10 +20,13 @@
                 </a>
             </h4>
             <h4 class="caption-title brand-name">
+                <span class="brand">{{ brand }}</span>
+            </h4>
+            <!-- <h4 class="caption-title brand-name">
                 <span *ngIf="product.attributes.Company">
                     {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
                 </span>
-            </h4>
+            </h4> -->
             <div class="price">
                 <div>
                     <del *ngIf="product.sale > 0">{{ price }} ₪</del>
@@ -73,10 +76,13 @@
             </a>
         </h4>
         <h4 class="caption-title brand-name">
+            <span class="brand">{{ brand }}</span>
+        </h4>
+        <!-- <h4 class="caption-title brand-name">
             <span *ngIf="product.attributes.Company">
                 {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
             </span>
-        </h4>
+        </h4> -->
         <div class="price">
             <div>
                 <del *ngIf="product.sale > 0">{{ price }} ₪</del>
@@ -114,10 +120,13 @@
             <a  title="{{ (product | localize:'title') || product.title }}"  routerLink="/product/{{ product.id }}">{{ (product | localize:'title') || product.title }}</a>
         </h4>
         <h4 class="caption-title brand-name">
+            <span class="brand">{{ brand }}</span>
+        </h4>
+        <!-- <h4 class="caption-title brand-name">
             <span *ngIf="product.attributes.Company">
                 {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
             </span>
-        </h4>
+        </h4> -->
         <div class="price">
             <div>
                 <del *ngIf="product.sale > 0">{{ price }} ₪</del>

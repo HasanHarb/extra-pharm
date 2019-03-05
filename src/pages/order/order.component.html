@@ -12,7 +12,43 @@
 
                         <div class="row orders">
                             <div class="col-md-12">
-                                    <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+                                <spinner *ngIf="busy" [size]="50" [tickness]="5" [color]="'#ff66ff'" style="right: 30%; margin-top: 10%"></spinner>
+                                <table class="table" *ngIf="!busy">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'ORDER_ID' | translate }}</th>
+                                            <th>{{ 'ORDER_DATE' | translate }}</th>
+                                            <th>{{ 'ORDER_STATUS' | translate }}</th>
+                                            <th></th>
+                                            <th>{{ 'TOTAL' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="total">{{ item.id }}</td>
+                                            <td class="description">
+                                                <h4>
+                                                    {{ item.created_at | date:'yyyy/M/dd' }}
+                                                </h4>
+                                            </td>
+                                            <td class="quantity">
+                                                <div class="quantity">
+                                                    {{ getStatus(item).status | translate }}
+                                                </div>
+                                            </td>
+                                            <td class="image">
+                                                <a class="media-link link">
+                                                    <i class="fa fa-plus"></i>
+                                                    <img width="70px" *ngIf="item.status && item.status != 'CANCEL' && getStatus(item)" [src]="getStatus(item).icon +'-done.png'" />
+                                                </a>
+                                            </td>
+                                            <td class="total">₪{{ item.final_price }}
+                                                <span class="status-text" style="color:red" *ngIf="item.is_special == 'YES'">
+                                                    <br/>{{ "SPECIAL_ORDER" | translate }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <table class="table" *ngIf="!busy">
                                     <thead>
                                         <tr>
