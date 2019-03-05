@@ -45,6 +45,7 @@ export class ProductItemComponent implements OnInit {
 	isPerfume: boolean = false;
 	// assets url
 	imagesUrlBase = Config.StorageUrl;
+	brand: string;
 
 	constructor(
 		private fav: Favorites,
@@ -62,6 +63,8 @@ export class ProductItemComponent implements OnInit {
 	 * ngOnInit
 	 */
 	ngOnInit() {
+		this.brand = this.product.attributes['الماركة'] ?this.product.attributes['الماركة'].name : null;
+		this.brand = this.product.attributes['Pharmacy Brands'] ?this.product.attributes['Pharmacy Brands'].name : this.brand;
 		if (this.navId && this.product.id == this.navId)
 			this.sepecialAlert();
 		// resolve prices on component init
