@@ -17,6 +17,12 @@
     border-color: #498dcb;
 }
 
+.brand {
+  font-size: 15px;
+  color: #EC0231;
+  font-weight: bold;
+}
+
 .pro-row-large {
     height: 420px;
 }

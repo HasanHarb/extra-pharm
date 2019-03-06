@@ -29,7 +29,7 @@
             </h4> -->
             <div class="price">
                 <div>
-                    <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+                    <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
                 </div>
                 <div>
                     <ins>
@@ -85,7 +85,7 @@
         </h4> -->
         <div class="price">
             <div>
-                <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+                <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
             </div>
             <div>
                 <ins>
@@ -129,7 +129,7 @@
         </h4> -->
         <div class="price">
             <div>
-                <del *ngIf="product.sale > 0">{{ price }} ₪</del>
+                <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
             </div>
             <div>
                 <ins>

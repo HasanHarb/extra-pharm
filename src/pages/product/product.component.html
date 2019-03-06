@@ -45,7 +45,7 @@
 
                     <div class="product-price">
                         <div>
-                            <del *ngIf="priceAfterSale != price">{{ price }} ₪</del>
+                            <div class="del" *ngIf="priceAfterSale != price">{{ price }} ₪</div>
                         </div>
                         <div>
                             <ins>
