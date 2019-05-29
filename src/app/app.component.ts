@@ -24,6 +24,7 @@ export class AppComponent {
 	mainCategories: any;
 	loggedIn: boolean = false;
 	user: any = <any>{};
+	socialLinks: any = localStorage.socialLinks ? JSON.parse(localStorage.socialLinks) : [];
 
 	newsletterEmail = "";
 	subscribeForm: FormGroup;
@@ -52,6 +53,11 @@ export class AppComponent {
 		this.repo.getAbout().subscribe((page: any) => {
 			this.content = page;
 		});
+
+		this.repo.getSocialLinks().subscribe((socialLinks: any) => {
+			this.socialLinks = socialLinks;
+		});
+
 		router.events.subscribe((val) => {
 			if (val instanceof NavigationEnd) {
 				if (!val.urlAfterRedirects.includes('search')) {

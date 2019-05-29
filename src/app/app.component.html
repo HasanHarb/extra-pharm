@@ -191,9 +191,9 @@
 							<h4 class="widget-title">{{ 'ABOUT' | translate }}</h4>
 							<!-- <p [innerHTML]="content.excerpt"></p> -->
 							<ul class="social-icons" *ngIf="settings">
-								<li>
-									<a href="https://www.facebook.com/extrapharm/" target="_blank"class="facebook">
-										<i class="fa fa-facebook"></i>
+								<li *ngFor="let link of socialLinks">
+									<a href="{{ link.link }}" target="_blank" class="facebook">
+										<i class="fa fa-{{ link.slug }}"></i>
 									</a>
 								</li>
 							</ul>

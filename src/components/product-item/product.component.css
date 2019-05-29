@@ -32,7 +32,22 @@
 }
 
 .pro-row-horizontal {
-    height: 145px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px dashed #ccc;
+}
+
+.pro-row-horizontal .price {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    position: absolute;
+    bottom: 0;
+}
+
+.pro-row-horizontal .price ins {
+    font-size: 3rem;
 }
 
 .how-much-sale {

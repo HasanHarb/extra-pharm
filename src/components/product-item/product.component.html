@@ -128,14 +128,10 @@
             </span>
         </h4> -->
         <div class="price">
-            <div>
-                <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
-            </div>
-            <div>
-                <ins>
-                    <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>
-                </ins>
-            </div>
+            <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
+            <ins>
+                <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>
+            </ins>
         </div>
     </div>
 </div>

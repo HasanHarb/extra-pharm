@@ -44,6 +44,7 @@ export class Repo {
     getPage(slug){
         return this.http.get(url + 'page/' + slug).map(res => res.json());
     }
+
     getAbout(){
         return this.http.get(url + 'page/' + 'about').map(res => res.json());
     }
@@ -236,6 +237,10 @@ export class Repo {
 
     payWithTranzila(data:any){
         return this.http.post(url + 'post/pay/tranzila', {data: data}).map(res => res.json());
+    }
+    
+    getSocialLinks(){
+        return this.http.get(url + 'links').map(res => res.json());
     }
 
 }
