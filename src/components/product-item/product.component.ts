@@ -247,7 +247,7 @@ export class ProductItemComponent implements OnInit {
 	}
 
 	attrHasProperty(key) {
-		if (this.product.attributes.hasOwnProperty(key)) {
+		if (this.product.attributes.hasOwnProperty(key) || key in this.product.attributes) {
 			return true;
 		}
 		return false;
