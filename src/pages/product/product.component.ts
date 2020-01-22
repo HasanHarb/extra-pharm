@@ -18,8 +18,8 @@ import { Globals } from '../../services/globals.service';
 export class ProductComponent implements OnInit {
 	pintTemp = "<img src='../assets/img/pinterest.svg'>";
 	busy: any;
-	// category slug
-	categorySlug: any;
+	// category name
+	categoryName: any;
 	// product data
 	products: ProductData[] = [];
 	@Input() _product: ProductData = <ProductData>{};
@@ -90,8 +90,7 @@ export class ProductComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
-			this.productId = params['id'],
-				this.categorySlug = params['slug']
+			this.productId = params['id']
 		});
 		this.topRatedCarouselOptions = {
 			rtl: true,
@@ -190,10 +189,10 @@ export class ProductComponent implements OnInit {
 			}
 			// attrs ready to show
 
+			this.categoryName = this.product.category.name ;
 			this.resolvePrices();
 			// resolve title
 			this.resolveTitle();
-			this.getCategorySlug();
 			this.getProducts();
 
 		}, err => this.productBusy = false);
@@ -202,14 +201,6 @@ export class ProductComponent implements OnInit {
 		this.location.back();
 	}
 
-	getCategorySlug() {
-		let searchQuery = {
-			id: this.product.category_id
-		};
-		this.repo.getCategory(searchQuery).subscribe((data: any) => {
-			this.categorySlug = data.slug;
-		});
-	}
 	/**
 	 * resolveTitle
 	 */

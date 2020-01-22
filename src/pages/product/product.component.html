@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row product-single">
                 <div class="col-md-6">
-                  <img class="img-responsive" src="{{ productImage }}" alt="{{ (product | localize:'title') || product.title }}">
+                    <img class="img-responsive" src="{{ productImage }}" alt="{{ (product | localize:'title') || product.title }}">
                     <div class="how-much-sale" *ngIf="product.sale > 0">
                         <span class="the-text-sale">{{ product.sale }} %{{ "SALE"| translate }}</span>
                     </div>
@@ -62,8 +62,7 @@
                         <div class="col-sm-6">
                             <div class="form-group selectpicker-wrapper">
                                 <label for="exampleSelect1">{{ 'TYPE' | translate }}</label>
-                                <select id="exampleSelect1" class="selectpicker input-price form-control" data-live-search="true" data-width="100%" data-toggle="tooltip"
-                                    title="Select" (change)="selectProductType($event.target.value)" [(ngModel)]="selectedTypeId" [ngModelOptions]="{standalone: true}">
+                                <select id="exampleSelect1" class="selectpicker input-price form-control" data-live-search="true" data-width="100%" data-toggle="tooltip" title="Select" (change)="selectProductType($event.target.value)" [(ngModel)]="selectedTypeId" [ngModelOptions]="{standalone: true}">
                                     <option *ngFor="let type of types" value="{{ type.id }}">{{ (type | localize:'name') || type.name }}</option>
                                 </select>
                             </div>
@@ -85,11 +84,11 @@
                     </form>
 
                     <div class="product-body">
-                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="product.body.length <= bodyLength"></div>
-                      <div class="product-text" [innerHTML]="truncateHTML(product.body)" *ngIf="truncating && product.body.length > bodyLength"></div>
-                      <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="!truncating && product.body.length > bodyLength"></div>
-                      <button class="show-more-btn show-more-text" *ngIf="truncating && product.body.length > bodyLength" (click)="truncating = false">{{ 'SHOW_MORE_TEXT' | translate }}</button>
-                      <button class="show-more-btn show-lestt-text" *ngIf="!truncating && product.body.length > bodyLength" (click)="truncating = true">{{ 'SHOW_LESS_TEXT' | translate }}</button>
+                        <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="product.body.length <= bodyLength"></div>
+                        <div class="product-text" [innerHTML]="truncateHTML(product.body)" *ngIf="truncating && product.body.length > bodyLength"></div>
+                        <div class="product-text" [innerHTML]="(product | localize:'body') || product.body" *ngIf="!truncating && product.body.length > bodyLength"></div>
+                        <button class="show-more-btn show-more-text" *ngIf="truncating && product.body.length > bodyLength" (click)="truncating = false">{{ 'SHOW_MORE_TEXT' | translate }}</button>
+                        <button class="show-more-btn show-lestt-text" *ngIf="!truncating && product.body.length > bodyLength" (click)="truncating = true">{{ 'SHOW_LESS_TEXT' | translate }}</button>
                     </div>
 
                     <div class="more-details">
@@ -100,9 +99,9 @@
                                         <strong>{{ 'YARPA_CODE' | translate }}: </strong>
                                         <span>{{ product.yarpa_code }}</span>
                                     </li>
-                                    <li *ngIf="categorySlug">
+                                    <li *ngIf="categoryName">
                                         <strong>{{ 'CATEGORY' | translate }}: </strong>
-                                        <span>{{ categorySlug }}</span>
+                                        <span>{{ categoryName }}</span>
                                     </li>
 
                                     <li *ngFor="let attr of attrsArray">
@@ -111,8 +110,7 @@
                                     </li>
 
                                     <li *ngIf="product.weight">
-                                        <strong *ngIf="!attrs?.hasOwnProperty('Weight Unit')">الوزن: </strong>
-                                        {{ product.weight }} <span *ngIf="attrs?.hasOwnProperty('Weight Unit')">{{ attrs['Weight Unit'].name }}</span>
+                                        <strong *ngIf="!attrs?.hasOwnProperty('Weight Unit')">الوزن: </strong> {{ product.weight }} <span *ngIf="attrs?.hasOwnProperty('Weight Unit')">{{ attrs['Weight Unit'].name }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -139,11 +137,9 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div> -->
-                        <button *ngIf="product.in_stock && !inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="addToCart()"
-                            [ngClass]="{'in-cart' : inCart()}">
+                        <button *ngIf="product.in_stock && !inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="addToCart()" [ngClass]="{'in-cart' : inCart()}">
                             <i class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate }}</button>
-                        <button *ngIf="product.in_stock && inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="removeProductFromCart(product)"
-                            [ngClass]="{'in-cart' : inCart()}">
+                        <button *ngIf="product.in_stock && inCart(product)" class="btn btn-theme btn-icon-left btn-cart-custom" type="submit" (click)="removeProductFromCart(product)" [ngClass]="{'in-cart' : inCart()}">
                             <i class="fa fa-shopping-cart"></i>{{ 'REMOVE_FORM_CART' | translate }}</button>
                         <button *ngIf="!product.in_stock" class="btn btn-theme btn-cart-custom btn-icon-left" type="submit" (click)="specialBtnClicked()">
                             <i class="fa fa-shopping-cart"></i>{{ 'SPECIAL_ORDER' | translate }}</button>
