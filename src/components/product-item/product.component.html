@@ -4,15 +4,18 @@
             <div class="how-much-sale" *ngIf="product.sale > 0">
                 <span class="the-text-sale">{{ product.sale }}% {{"SALE"| translate}}</span>
             </div>
-            <a class="media-link media-large" title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
+            <a class="media-link media-large" title="{{ (product | localize:'title') || product.title }}"
+                routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
                 <span class="icon-view">
                     <strong>
                         <i class="fa fa-eye"></i>
                     </strong>
                 </span>
             </a>
-            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.icon.image+')'}"></div>
-            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('Icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.Icon.image+')'}"></div>
+            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('Icon')"
+                [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.Icon.image+')'}"></div>
+            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('icon')"
+                [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.icon.image+')'}"></div>
         </div>
         <div class="caption text-center">
             <h4 class="caption-title">
@@ -20,24 +23,31 @@
                     {{ (product | localize:'title') || product.title }}
                 </a>
             </h4>
-            <h5 class="caption-title brand-name">
-                <span class="brand">{{ brand }}</span>
-            </h5>
+            <h4 class="caption-title brand-name">
+                <span class="">{{ brand }}</span>
+            </h4>
             <!-- <h4 class="caption-title brand-name">
                 <span *ngIf="product.attributes.Company">
                     {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
                 </span>
             </h4> -->
-            <div class="price">
-                <ins>
-                    <span class="new-price">
-                        <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
-                        <span class="int">₪{{ priceAfterSale }}</span>
-                    </span>
-                </ins>
+            <div class="price-position">
+                <div class="price">
+                    <div>
+                        <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
+                    </div>
+                    <div>
+                        <ins>
+                            <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span
+                                    class="decimal">{{priceAsString[1]}}</span></span>
+                        </ins>
+                    </div>
+                </div>
             </div>
+
             <div class="buttons">
-                <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
+                <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}"
+                    (click)="toggleFav()">
                     <span *ngIf="inFav()">
                         <img src="assets/img/in_fav.svg" />
                     </span>
@@ -45,12 +55,17 @@
                         <img src="assets/img/out_fav.svg" />
                     </span>
                 </a>
-                <a *ngIf="!cartPage && product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                <a *ngIf="!cartPage && product.in_stock"
+                    class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart"
+                    [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()"
+                    [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     <i class="fa fa-shopping-cart"></i>
                     <span *ngIf="inCart(product)">{{ 'REMOVE_FORM_CART' | translate }}</span>
                     <span *ngIf="!inCart(product)">{{ 'ADD_TO_CART' | translate }}</span>
                 </a>
-                <a *ngIf="!cartPage && !product.in_stock" class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart" (click)="specialOrder()" [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
+                <a *ngIf="!cartPage && !product.in_stock"
+                    class="btn btn-theme btn-theme-transparent btn-icon-left btn-cart" (click)="specialOrder()"
+                    [ngBusy]="{busy: busy, message: 'Loaading..', backdrop: false, delay: 1000, minDuration: 600}">
                     {{ 'SPECIAL_ORDER' | translate }}
                 </a>
             </div>
@@ -60,7 +75,8 @@
 
 <div class="pro-row-small thumbnail no-border no-padding" *ngIf="template == 'small'">
     <div class="media">
-        <a class="media-link media-small" title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
+        <a class="media-link media-small" title="{{ (product | localize:'title') || product.title }}"
+            routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
             <span class="icon-view">
                 <strong>
                     <i class="fa fa-eye"></i>
@@ -82,16 +98,23 @@
                 {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
             </span>
         </h4> -->
-        <div class="price">
-            <ins>
-                <span class="new-price">
-                    <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
-                    <span class="int">₪{{ priceAfterSale }}</span>
-                </span>
-            </ins>
+        <div class="price-position">
+
+            <div class="price">
+                <div>
+                    <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
+                </div>
+                <div>
+                    <ins>
+                        <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span
+                                class="decimal">{{priceAsString[1]}}</span></span>
+                    </ins>
+                </div>
+            </div>
         </div>
         <div class="buttons">
-            <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
+            <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}"
+                (click)="toggleFav()">
                 <span *ngIf="inFav()">
                     <img src="assets/img/in_fav.svg" />
                 </span>
@@ -99,7 +122,8 @@
                     <img src="assets/img/out_fav.svg" />
                 </span>
             </a>
-            <a class="btn btn-theme btn-theme-transparent btn-cart" [ngClass]="{'in-cart' : inCart(product)}" (click)="addToCart()">
+            <a class="btn btn-theme btn-theme-transparent btn-cart" [ngClass]="{'in-cart' : inCart(product)}"
+                (click)="addToCart()">
                 <i class="fa fa-shopping-cart"></i>
                 <span *ngIf="inCart(product)">{{ 'REMOVE_FORM_CART' | translate }}</span>
                 <span *ngIf="!inCart(product)">{{ 'ADD_TO_CART' | translate }}</span>
@@ -108,31 +132,30 @@
     </div>
 </div>
 
-<div class="block" *ngIf="template == 'horizontal'">
-    <a title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}">
-        <div class="box box_bowShadow">
-            <div class="split">
-                <div class="offer-sal" *ngIf="product.sale > 0">
-                    <span class="">{{ product.sale }}% {{"SALE"| translate}}</span>
-                </div>
-                <div class="split-right">
-                    <img [src]="product.image" alt="" />
-                </div>
-                <div class="split-left">
-                    <div class="totem">
-                        <a class="totem-bd" title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}">{{ (product | localize:'title') || product.title }}</a>
-                        <p class="totem-hd">{{ brand }}</p>
-                        <div class="price">
-                            <ins>
-                                <span class="new-price">
-                                    <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
-                                    <span class="int">₪{{ priceAfterSale }}</span>
-                                </span>
-                            </ins>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="pro-row-horizontal media horizontal-item" *ngIf="template == 'horizontal'">
+    <a class="pull-right media-link media-image media-hor" title="{{ (product | localize:'title') || product.title }}"
+        routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
+        <i class="fa fa-plus"></i>
     </a>
+    <div class="media-body">
+        <h4 class="media-heading">
+            <a title="{{ (product | localize:'title') || product.title }}"
+                routerLink="/product/{{ product.id }}">{{ (product | localize:'title') || product.title }}</a>
+        </h4>
+        <h4 class="caption-title brand-name">
+            <span class="brand">{{ brand }}</span>
+        </h4>
+        <!-- <h4 class="caption-title brand-name">
+            <span *ngIf="product.attributes.Company">
+                {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
+            </span>
+        </h4> -->
+        <div class="price">
+            <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
+            <ins>
+                <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span
+                        class="decimal">{{ priceAsString[1] }}</span></span>
+            </ins>
+        </div>
+    </div>
 </div>

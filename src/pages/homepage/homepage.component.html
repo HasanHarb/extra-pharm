@@ -111,7 +111,7 @@
 <section class="page-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4" *ngFor="let item of topCategorizedProducts">
+            <div class="col-md-3" *ngFor="let item of topCategorizedProducts">
                 <div class="product-list">
                     <a class="btn btn-theme btn-title-more" [title]="host + '/products/' + item.category.slug" routerLink="/products/{{ item.category.slug }}" style="margin-right: 0px;z-index: 100000;margin-top: -10px;">{{ 'SEE_ALL' | translate }}</a>
                     <h4 class="block-title">

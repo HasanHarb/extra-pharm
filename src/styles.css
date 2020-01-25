@@ -4,16 +4,15 @@
     font-family: 'OpenSansHebrew Regular';
     src: url('assets/fonts/OpenSansHebrew-Regular.ttf');
 }
-
 @font-face {
     font-family: 'OpenSansHebrew Bold';
     src: url('assets/fonts/OpenSansHebrew-Bold.ttf');
 }
-
 @font-face {
     font-family: 'OpenSansHebrew Light';
     src: url('assets/fonts/OpenSansHebrew-Light.ttf');
 }
+
 
 @font-face {
     font-family: 'Bahij Bold';
@@ -48,10 +47,10 @@ body {
 .lang-he h1,
 .lang-he h2,
 .lang-he h3,
-.lang-he h4,
+.lang-he h4, 
 .lang-he a,
 .lang-he div,
-.lang-he section {
+.lang-he section{
     font-family: 'OpenSansHebrew Regular' !important;
 }
 
@@ -67,6 +66,7 @@ ins {
     font-family: 'Bahij Bold' !important;
     color: #EC0231;
     text-decoration: none;
+    font-size: 3.3rem;
 }
 
 div.del {
@@ -74,6 +74,7 @@ div.del {
     display: initial;
     position: relative;
     padding: 0 5px;
+    font-size: 2.5rem;
 }
 
 div.del:before {
@@ -84,9 +85,10 @@ div.del:before {
     right: 0;
     border-top: 2px solid;
     border-color: inherit;
-    -webkit-transform: rotate(-10deg);
-    -moz-transform: rotate(-10deg);
-    -ms-transform: rotate(-10deg);
-    -o-transform: rotate(-10deg);
-    transform: rotate(-10deg);
+  
+    -webkit-transform:rotate(-10deg);
+    -moz-transform:rotate(-10deg);
+    -ms-transform:rotate(-10deg);
+    -o-transform:rotate(-10deg);
+    transform:rotate(-10deg);
 }

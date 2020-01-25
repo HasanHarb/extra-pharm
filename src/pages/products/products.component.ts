@@ -145,8 +145,6 @@ export class ProductsComponent implements OnInit, OnChanges {
 			}
 			this.productPaginate = data;
 			this.products = data.data;
-			console.log(this.categorySlug , this.products);
-
 		}, err => this.busy = false);
 	}
 

@@ -3567,7 +3567,6 @@ input[type=checkbox] {
     border-radius: 0;
     background-color: transparent;
     position: relative;
-    height: 400px;
 }
 @media (max-width: 991px) {
     .thumbnail {
