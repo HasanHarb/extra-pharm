@@ -11,7 +11,7 @@
                     </strong>
                 </span>
             </a>
-            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.icon.image+')'}"></div>
+            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('Icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.Icon.image+')'}"></div>
         </div>
         <div class="caption text-center">
             <h4 class="caption-title">
@@ -28,14 +28,12 @@
                 </span>
             </h4> -->
             <div class="price">
-                <div>
-                    <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
-                </div>
-                <div>
-                    <ins>
-                        <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
-                    </ins>
-                </div>
+                <ins>
+                    <span class="new-price">
+                        <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
+                        <span class="int">₪{{ priceAfterSale }}</span>
+                    </span>
+                </ins>
             </div>
             <div class="buttons">
                 <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
@@ -84,14 +82,12 @@
             </span>
         </h4> -->
         <div class="price">
-            <div>
-                <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
-            </div>
-            <div>
-                <ins>
-                    <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{priceAsString[1]}}</span></span>
-                </ins>
-            </div>
+            <ins>
+                <span class="new-price">
+                    <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
+                    <span class="int">₪{{ priceAfterSale }}</span>
+                </span>
+            </ins>
         </div>
         <div class="buttons">
             <a class="btn btn-theme btn-theme-transparent btn-heart" [ngClass]="{'in-fav' : inFav()}" (click)="toggleFav()">
@@ -111,27 +107,31 @@
     </div>
 </div>
 
-<div class="pro-row-horizontal media horizontal-item" *ngIf="template == 'horizontal'">
-    <a class="pull-right media-link media-image media-hor" title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}" [ngStyle]="{'background-image': 'url(' + product.image +')'}">
-        <i class="fa fa-plus"></i>
-    </a>
-    <div class="media-body">
-        <h4 class="media-heading">
-            <a title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}">{{ (product | localize:'title') || product.title }}</a>
-        </h4>
-        <h4 class="caption-title brand-name">
-            <span class="brand">{{ brand }}</span>
-        </h4>
-        <!-- <h4 class="caption-title brand-name">
-            <span *ngIf="product.attributes.Company">
-                {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
-            </span>
-        </h4> -->
-        <div class="price">
-            <div class="del" *ngIf="product.sale > 0">{{ price }} ₪</div>
-            <ins>
-                <span class="new-price"><span class="int">₪{{ priceAsString[0] }}</span><span class="decimal">{{ priceAsString[1] }}</span></span>
-            </ins>
+<div class="block" *ngIf="template == 'horizontal'">
+    <a title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}">
+        <div class="box box_bowShadow">
+            <div class="split">
+                <div class="offer-sal" *ngIf="product.sale > 0">
+                    <span class="">{{ product.sale }}% {{"SALE"| translate}}</span>
+                </div>
+                <div class="split-right">
+                    <img [src]="product.image" alt="" />
+                </div>
+                <div class="split-left">
+                    <div class="totem">
+                        <a class="totem-bd" title="{{ (product | localize:'title') || product.title }}" routerLink="/product/{{ product.id }}">{{ (product | localize:'title') || product.title }}</a>
+                        <p class="totem-hd">{{ brand }}</p>
+                        <div class="price">
+                            <ins>
+                                <span class="new-price">
+                                    <span class="del" *ngIf="product.sale > 0">₪{{ price }}</span>
+                                    <span class="int">₪{{ priceAfterSale }}</span>
+                                </span>
+                            </ins>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </a>
 </div>
