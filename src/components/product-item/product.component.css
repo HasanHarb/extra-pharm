@@ -82,7 +82,8 @@
 }
 
 .caption-title {
-  height: 50px;
+  color: #000000;
+  line-height: 26px;
 }
 
 .caption-company {
@@ -111,6 +112,9 @@
   float: left;
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 }
 
 .btn-heart {
@@ -244,7 +248,7 @@
   left: 5px;
   top: 5px;
   z-index: 10;
-  padding: 5px 10px;
+  padding: 3px 8px;
   background-color: #ec0231;
   border-radius: 15px 0 15px 0px;
   color: #fff;
@@ -257,4 +261,5 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  font-size: 13px;
 }

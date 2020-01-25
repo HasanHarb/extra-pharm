@@ -11,6 +11,7 @@
                     </strong>
                 </span>
             </a>
+            <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.icon.image+')'}"></div>
             <div class="product-icon" *ngIf="hasAttributes && attrHasProperty('Icon')" [ngStyle]="{'background-image' : 'url('+imagesUrlBase + product.attributes.Icon.image+')'}"></div>
         </div>
         <div class="caption text-center">
@@ -19,9 +20,9 @@
                     {{ (product | localize:'title') || product.title }}
                 </a>
             </h4>
-            <h4 class="caption-title brand-name">
+            <h5 class="caption-title brand-name">
                 <span class="brand">{{ brand }}</span>
-            </h4>
+            </h5>
             <!-- <h4 class="caption-title brand-name">
                 <span *ngIf="product.attributes.Company">
                     {{ product.attributes.Company | localize:'name' || product.attributes.Company.name }}
