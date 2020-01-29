@@ -111,8 +111,8 @@
 											localize:'title') || item.product.title }}</a>
                                     </h4>
                                 </td>
-                                <td class="total">₪{{ resolvePrices(item) }}</td>
-                                <td class="total">₪{{ resolvePrices(item) * item.quantity }}
+                                <td class="total">₪{{ resolvePrices(item) | number : '1.2-2'}}</td>
+                                <td class="total">₪{{ resolvePrices(item) * item.quantity | number : '1.2-2'}}
                                     <a title="{{ 'REMOVE' | translate }}" mwlConfirmationPopover confirmText="{{ 'YES' | translate }}" cancelText="{{ 'NO' | translate }}" popoverTitle="{{ 'CONFIRM_DELETE' | translate }}" popoverMessage="{{ 'CONFIRM_DELETE_MSG' | translate }}" placement="left"
                                         (confirm)="remove(item)">
                                         <i class="fa fa-close"></i>
@@ -224,7 +224,7 @@
                             </tr>
                             <tr>
                                 <td>{{ 'DISCOUNT' | translate }}:</td>
-                                <td>₪{{ discount }}
+                                <td>₪{{ discount | number : '1.2-2'}}
                                     <a title="{{ 'CANCEL' | translate }}" (click)="cancelCoupon()" *ngIf="discount">
                                         <i class="fa fa-close"></i>
                                     </a>

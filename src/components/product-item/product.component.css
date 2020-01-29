@@ -36,6 +36,8 @@
 	height: 200px;
 	overflow: hidden;
 	position: relative;
+	/* border-right: 1px dashed #c8c8c8;
+	border-bottom: 1px dashed #c8c8c8 */
 }
 
 .pro-row-horizontal .price {
@@ -44,7 +46,7 @@
 	width: max-content;
 	position: absolute;
 	left: 0;
-	bottom: 0;
+	bottom: 5px;
 }
 
 .pro-row-horizontal .price ins {
@@ -143,7 +145,7 @@
 }
 
 .price .decimal {
-	font-size: 19px;
+	font-size: 18px;
 }
 
 .thumbnail {
@@ -164,7 +166,7 @@
 	position: absolute;
 	left: 20px;
 	right: 20px;
-	bottom: 0;
+	bottom: 5px;
 	width: 100%;
 	border-bottom: 1px dashed #c8c8c8;
 }
@@ -173,6 +175,6 @@
 	content: "";
 	position: absolute;
 	border-right: 1px dashed #c8c8c8;
-	top: 20px;
-	bottom: 20px;
+	top: 15px;
+	bottom: 25px;
 }
